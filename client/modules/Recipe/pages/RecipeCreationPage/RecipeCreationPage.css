@@ -1,0 +1,25 @@
+.create-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.create-form > * {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:25px;
+}
+
+.create-title{
+}
+
+.create-input{
+  width: 300px;
+}
+
+.create-button{
+
+}
+
+.select{
+  width: 300px;
+}
