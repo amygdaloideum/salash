@@ -9,11 +9,11 @@ import slug from 'limax';
  * @returns void
  */
 export function getCategories(req, res) {
-  Category.find().exec((err, Categories) => {
+  Category.find().exec((err, categories) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({ Categories });
+    res.json({ categories });
   });
 }
 

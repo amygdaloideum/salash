@@ -1,0 +1,10 @@
+[
+  {"_id": "banana", "singular": "banana", "plural": "bananas"},
+  {"_id": "carrot", "singular": "carrot", "plural": "carrots"},
+  {"_id": "mango", "singular": "mango", "plural": "mangoes"},
+  {"_id": "pineapple", "singular": "pineapple", "plural": "pineapples"},
+  {"_id": "tomato", "singular": "tomato", "plural": "tomatoes"},
+  {"_id": "walnut", "singular": "walnut", "plural": "walnuts"},
+  {"_id": "kale", "singular": "kale", "plural": "kale"},
+  {"_id": "honeydew-melon", "singular": "honeydew melon", "plural": "honeydew melons"}
+]

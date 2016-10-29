@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "salad",
+    "title": "salad",
+    "plural": "salads"
+  },
+  {
+    "_id": "smoothie",
+    "title": "smoothie",
+    "plural": "smoothies"
+  },
+  {
+    "_id": "dressing",    
+    "title": "dressing",
+    "plural": "dressings"
+  },
+  {
+    "_id": "snack",    
+    "title": "snack",
+    "plural": "snacks"
+  },
+  {
+    "_id": "soup",    
+    "title": "soup",
+    "plural": "soups"
+  }
+]

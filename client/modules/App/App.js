@@ -9,7 +9,6 @@ import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { AuthGlobals } from "redux-auth/material-ui-theme";
 
 // Import Actions
 import { toggleAddPost } from './AppActions';
@@ -55,7 +54,6 @@ export class App extends Component {
             toggleAddPost={this.toggleAddPostSection}
           />
           <div className={styles.container}>
-            <AuthGlobals />
             {this.props.children}
           </div>
           <Footer />

@@ -1,4 +1,4 @@
-.content {
+.big-content {
   width: 100%;
   max-width: 980px;
   margin: auto;
@@ -6,11 +6,25 @@
   overflow: auto;
 }
 
+.small-content {
+  width: 100%;
+  max-width: 980px;
+  margin: auto;
+  overflow: auto;
+}
+
+.small-content h1 a {
+  text-decoration: none;
+  color: black;
+  font-weight: 900;
+  font-size: 50px;
+  margin: 20px;
+}
+
+
 .site-title {
-  font-weight: 300;
-  font-size: 72px;
-  text-align: center;
-  font-family: 'Nova Mono', monospace;
+  font-weight: 900;
+  font-size: 90px;
 }
 
 .site-title a {
@@ -18,10 +32,18 @@
   color: black;
 }
 
+
+
+.subheader{
+  display: block;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
 .add-post-button {
   display: inline-block;
   color: #FFF;
-  background: #03A9F4;
+  background: #990012;
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 1000px;
@@ -29,14 +51,13 @@
 }
 
 .language-switcher {
-  background: rgba(0, 0, 0, 0.1);
+  /*background: rgba(0, 0, 0, 0.05);*/
 }
 
 .language-switcher ul {
+  max-width: 980px;
   list-style: none;
-  width: 980px;
   margin: auto;
-  text-align: right;
 }
 
 .language-switcher li {
@@ -44,11 +65,7 @@
   margin: 10px;
   padding: 5px;
   cursor: pointer;
-  color: #fff;
-}
-
-.language-switcher li:first-child {
-  color: rgba(255, 255, 255, 0.7);
+  color: grey;
 }
 
 .selected {

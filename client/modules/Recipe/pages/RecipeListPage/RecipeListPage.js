@@ -15,7 +15,7 @@ import { getRecipes } from '../../RecipeReducer';
 class RecipeListPage extends Component {
   componentDidMount() {
     console.log(this.props);
-    this.props.dispatch(searchRecipes(this.props.routeParams.title));
+    this.props.dispatch(searchRecipes(this.props.location.query));
   }
 
   render() {
@@ -28,8 +28,8 @@ class RecipeListPage extends Component {
 }
 
 // Actions required to provide data for this component to render in sever side.
-RecipeListPage.need = [params => {
-  return searchRecipes(params.title);
+RecipeListPage.need = [({ query }) => {
+  return searchRecipes(query);
 }];
 
 // Retrieve data from store as props

@@ -7,16 +7,20 @@ import { combineReducers } from 'redux';
 import app from './modules/App/AppReducer';
 import posts from './modules/Post/PostReducer';
 import recipes from './modules/Recipe/RecipeReducer';
+import categories from './modules/Category/CategoryReducer';
 import intl from './modules/Intl/IntlReducer';
+import auth from './modules/Auth/AuthReducer';
 import { routerReducer as routing } from 'react-router-redux';
-import { authStateReducer as auth } from 'redux-auth';
+import { reducer as form } from 'redux-form'
 
 // Combine all reducers into one root reducer
 export default combineReducers({
   routing,
-  auth,
+  form,
   app,
   posts,
   recipes,
+  categories,
   intl,
+  auth
 });

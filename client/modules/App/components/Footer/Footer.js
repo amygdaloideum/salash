@@ -10,8 +10,7 @@ import bg from '../../header-bk.png';
 export function Footer() {
   return (
     <div className={styles.footer}>
-      <p>&copy; 2016 &middot; Hashnode &middot; LinearBytes Inc.</p>
-      <p><FormattedMessage id="twitterMessage" /> : <a href="https://twitter.com/@mern_io" target="_Blank">@mern_io</a></p>
+      <p>Made with <span>♥</span> by Daniel Bornstrand</p>
     </div>
   );
 }

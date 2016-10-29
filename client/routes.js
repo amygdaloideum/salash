@@ -22,6 +22,9 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Recipe/pages/RecipeSearchPage/RecipeSearchPage');
   require('./modules/Recipe/pages/RecipeCreationPage/RecipeCreationPage');
   require('./modules/Recipe/pages/RecipeDetailPage/RecipeDetailPage');
+  require('./modules/Auth/pages/LoginPage/LoginPage');
+  require('./modules/Auth/pages/SignupPage/SignupPage');
+  require('./modules/Auth/pages/NotFoundPage/NotFoundPage');
 }
 
 // react-router setup with code-splitting
@@ -52,7 +55,7 @@ export default (
       }}
     />
     <Route
-      path="/recipes/search/:title"
+      path="/search"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Recipe/pages/RecipeListPage/RecipeListPage').default);
@@ -72,6 +75,30 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Recipe/pages/RecipeCreationPage/RecipeCreationPage').default);
+        });
+      }}
+    />
+    <Route
+      path="/login"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Auth/pages/LoginPage/LoginPage').default);
+        });
+      }}
+    />
+    <Route
+      path="/signup"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Auth/pages/SignupPage/SignupPage').default);
+        });
+      }}
+    />
+    <Route
+      path="*"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Auth/pages/NotFoundPage/NotFoundPage').default);
         });
       }}
     />

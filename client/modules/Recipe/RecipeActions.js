@@ -1,4 +1,5 @@
 import callApi from '../../util/apiCaller';
+import { build } from '../../util/queryBuilder';
 // Export Constants
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const ADD_RECIPES = 'ADD_RECIPES';
@@ -32,9 +33,9 @@ export function fetchRecipe(cuid) {
   };
 }
 
-export function searchRecipes(title) {
+export function searchRecipes(query) {
   return (dispatch) => {
-    return callApi(`recipes/search/${title}`).then(res => {
+    return callApi(build(query)).then(res => {
       dispatch(addRecipes(res.recipes));
     });
   };

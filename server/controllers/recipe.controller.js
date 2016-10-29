@@ -1,4 +1,5 @@
 import Recipe from '../models/recipe';
+import Category from '../models/category';
 import cuid from 'cuid';
 import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
@@ -10,7 +11,7 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getRecipes(req, res) {
-  Recipe.find().sort('-dateAdded').populate('ingredients categories').exec((err, recipes) => {
+  Recipe.find().sort('-dateAdded').populate('ingredients.ingredient categories').exec((err, recipes) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -42,9 +43,27 @@ export function getRecipesByTitle(req, res) {
   });
 }
 
+export function searchRecipes(req, res) {
+  const categories = req.query.category.constructor === Array ? req.query.category : [req.query.category];
+  const ingredients = req.query.ingredient.constructor === Array ? req.query.ingredient : [req.query.ingredient];
+  Recipe.find({
+    categories: { $all: categories },
+    'ingredients.ingredient': { $all: ingredients }
+  }).populate('ingredients.ingredient categories').exec((err, recipes) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ recipes });
+  });
+}
+
 export function addRecipe(req, res) {
+  if (!req.user) {
+    return res.status(401).end();
+  }
+
   if (!req.body.recipe.title || !req.body.recipe.description) {
-    res.status(403).end();
+    return res.status(403).end();
   }
 
   const newRecipe = new Recipe(req.body.recipe);

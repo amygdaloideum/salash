@@ -10,26 +10,13 @@
 	line-height: normal;
 }
 
-::-webkit-input-placeholder {
-	color:#aaa;
-	font-weight: 300;
-}
-::-moz-placeholder {
-	color:#aaa;
-	font-weight: 300;
-}
-:-ms-input-placeholder {
-	color:#aaa;
-	font-weight: 300;
-}
-input:-moz-placeholder {
-	color:#aaa;
-	font-weight: 300;
+::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
 }
 
 body {
-  //background: linear-gradient(125deg, #134E5E, #71B280);
-	font-family: 'Lato', sans-serif;
+  /*background: linear-gradient(125deg, #134E5E, #71B280);*/
+	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 }
 
@@ -41,4 +28,8 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+body .Select-control{
+	border:none;
 }

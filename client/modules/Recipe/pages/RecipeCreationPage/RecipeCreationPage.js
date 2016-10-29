@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addRecipeRequest } from '../../RecipeActions';
-import Select from 'react-select';
+import Select, { Async } from 'react-select';
 import callApi from '../../../../util/apiCaller';
 
 // Import Style
@@ -68,7 +68,7 @@ export class RecipeCreationPage extends Component {
       <div className={styles['create-form']}>
         <h2 className={styles['create-title']}>Add recipe!</h2>
         <input className={styles['create-input']} placeholder='Title' ref="title" />
-        <Select.Async
+        <Async
           className={styles['select']}
           name="form-field-name"
           value={this.state.ingredientsValue}
@@ -80,7 +80,7 @@ export class RecipeCreationPage extends Component {
           valueKey="title"
           multi={true}
         />
-        <Select.Async
+        <Async
           className={styles['select']}
           name="form-field-name"
           value={this.state.categoriesValue}

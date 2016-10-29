@@ -1,63 +1,83 @@
 .single-recipe {
-  margin: 20px 0;
-  padding: 15px;
+  padding: 15px 10px;
   border-radius: 2px;
-  text-align: center;
   cursor:pointer;
+}
+
+.single-recipe:nth-child(1) .divider {
+  background: #791642
+}
+
+.single-recipe:nth-child(2) .divider {
+  background: #9ECF38
+}
+
+.single-recipe:nth-child(3) .divider {
+  background: #FEE739  
+}
+
+.single-recipe:nth-child(4) .divider {
+  background: #F2921D  
+}
+
+.single-recipe:nth-child(5) .divider {
+  background: #D62434  
 }
 
 .single-recipe:hover {
   background-color: rgba(0,0,0,0.05);
 }
 
-.post-title{
+.title{
   font-size: 28px;
   margin-bottom: 16px;
   font-weight: 400;
 }
 
-.post-title a{
+.title a{
+  font-weight: 800;  
   text-decoration: none;
-  color: #616161;
+  color: black;
 }
 
-.author-name{
-  font-size: 16px;
-  margin-bottom: 16px;
-  color: #757575;
-}
-
-.post-desc{
+.desc{
   font-size: 14px;
   color: #888;
+  margin-top: 20px;
   margin-bottom: 8px;
-}
-
-.post-action a{
-  color: #555;
-  text-decoration: none;
-  font-size: 14px;
-  font-style: italic;
-}
-
-.post-action a:hover{
-  color: #EF5350;
 }
 
 .divider{
   border: 0;
-  height: 1px;
+  height: 4px;
   background: #ccc;
-  width: 250px;
-  margin: 32px auto 0;
+  width: 300px;
+  margin: 15px 0 0;
 }
 
-.post-detail .post-title{
+.title{
   font-size: 42px;
   color: #454545;
 }
 
-.post-detail .post-desc{
+.desc{
   font-size: 16px;
   color: #555;
+}
+
+.label{
+  color: #555;
+  margin-right: 10px;
+}
+
+.ingredient{
+  margin: 3px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+.category{
+  margin: 3px;
+  font-weight: 700;  
+  border-radius: 5px;
 }

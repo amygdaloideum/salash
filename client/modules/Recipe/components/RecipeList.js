@@ -2,10 +2,11 @@ import React, { PropTypes } from 'react';
 
 // Import Components
 import RecipeListItem from './RecipeListItem/RecipeListItem';
+//import styles from './RecipeList.css';
 
 function RecipeList(props) {
   return (
-    <div className="listView">
+    <div>
       {
         props.recipes.map(recipe => (
           <RecipeListItem

@@ -6,59 +6,6 @@ import Comment from './models/comment';
 
 export default function () {
 
-  //Ingredients
-
-  const tomato = new Recipe({
-    title: 'Tomato',
-    cuid: 'tomatocuid',
-  });
-
-  const celery = new Recipe({
-    title: 'Celery',
-    cuid: 'celerycuid',
-  });
-
-  //Categories
-
-  const smoothie = new Category({
-    title: 'smoothie',
-    cuid: 'smoothiecuid',
-  });
-
-  const dressing = new Category({
-    title: 'dressing',
-    cuid: 'dressingcuid',
-  });
-
-
-  Ingredient.count().exec((err, count) => {
-    if (count > 0) {
-      return;
-    }
-
-    Ingredient.create([tomato, celery], (error) => {
-      if (!error) {
-        console.log('ready to go....');
-      } else{
-        console.log(error);
-      }
-    });
-  });
-
-  Category.count().exec((err, count) => {
-    if (count > 0) {
-      return;
-    }
-
-    Category.create([smoothie, dressing], (error) => {
-      if (!error) {
-        console.log('ready to go....');
-      } else{
-        console.log(error);
-      }
-    });
-  });
-
   Recipe.count().exec((err, count) => {
     if (count > 0) {
       return;
