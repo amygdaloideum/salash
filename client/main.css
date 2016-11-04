@@ -33,3 +33,8 @@ body {
 body .Select-control{
 	border:none;
 }
+
+div, a, p, section {
+	font-weight: 300;
+	text-decoration: none;
+}

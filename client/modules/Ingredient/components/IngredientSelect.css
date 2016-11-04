@@ -1,0 +1,16 @@
+.row {
+  display: inline-block;
+  padding: 10px;
+}
+
+.container label {
+  font-weight: 600;
+}
+
+.ingredients-list {
+  list-style-type: none;
+}
+
+.container {
+ padding: 10px;
+}

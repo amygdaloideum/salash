@@ -2,7 +2,16 @@ import User from '../models/user';
 import jwt from 'jsonwebtoken';
 import config from '../config/config'
 
-const getUserToSign = ({email, password, username, recipes}) => ({email, password, username, recipes});
+const getUserToSign = ({_id, email, username, recipes}) => ({_id, email, username, recipes});
+
+export function getUser(req, res) {
+  User.findById(req.params.id).populate('recipes').exec((err, user) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ user });
+  });
+}
 
 export function validateUser(req, res) {
   const findUserCallback = (err, user) => {
@@ -15,21 +24,22 @@ export function validateUser(req, res) {
         if(!res){
           res.json({ success: false, message: 'Authentication failed. Wrong password.' });
         } else {
-          var token = jwt.sign(getUserToSign(user), config.secret, {
+          const formattedUser = getUserToSign(user);
+          var token = jwt.sign(formattedUser, config.secret, {
             expiresIn: '24h' // expires in 24 hours
           });
 
           res.json({
             success: true,
             message: 'Authentication succeeded.',
-            user: user,
+            user: formattedUser,
             token: token
           });
         }
       });
     }
   }
-  User.findOne({ email: req.body.email }, findUserCallback);
+  User.findOne({ email: req.body.email }).select('+password').exec(findUserCallback);
 }
 
 export function signupUser(req, res) {

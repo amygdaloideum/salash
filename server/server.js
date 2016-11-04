@@ -44,7 +44,7 @@ import auth from './routes/auth.routes';
 import users from './routes/user.routes';
 import dummyData from './dummyData';
 import serverConfig from './config/config'
-import { getInitialState } from './util/authUtils';
+import { getInitialState, isAuthenticated } from './util/authUtils';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -96,9 +96,8 @@ const renderFullPage = (html, initialState) => {
 
   ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
   <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
-  <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
   </head>
   <body>
   <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
@@ -125,7 +124,7 @@ const renderFullPage = (html, initialState) => {
 
   // Server Side Rendering based on routes matched by React-router.
   app.use((req, res, next) => {
-    match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
+    match({ routes: routes(isAuthenticated(req, res)) , location: req.url }, (err, redirectLocation, renderProps) => {
       if (err) {
         return res.status(500).end(renderError(err));
       }

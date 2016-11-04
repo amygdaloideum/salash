@@ -12,13 +12,19 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
+    select: false,
     required: true
   },
   username: {
     type: String,
     required: true
-  },
-  recipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
+  }
+}, { toJSON: { virtuals: true } });
+
+userSchema.virtual('recipes', {
+  ref: 'Recipe',
+  localField: '_id',
+  foreignField: 'author'
 });
 
 // Pre-save of user to database, hash password if password is modified or new

@@ -13,25 +13,36 @@ import { getRecipe } from '../../RecipeReducer';
 class RecipeDetailsPage extends Component {
   render() {
     return (
-      <div>
-        <h3 className={styles['single-recipe']}>{this.props.recipe.title}</h3>
-        <div>
-          <span>Categories: </span>
-          {this.props.recipe.categories.map((cat) => (
-            <span key={cat._id}>{cat.title}</span>
+      <div className={styles['single-recipe']}>
+        <h1>{this.props.recipe.title}</h1>
+        <div className={styles['categories']}>
+          {this.props.recipe.categories.map((cat, i) => (
+            <span key={i}>{cat.title}</span>
           ))}
         </div>
-        <div>
-          <span>Ingredients</span>
-        </div>
+
         <p>{this.props.recipe.description}</p>
+        
+        <div>
+          <h3>Ingredients</h3>
+          <table>
+            {this.props.recipe.ingredients.map((ing, i) => (
+              <tr key={i}>
+                <td>{ing.ingredient}</td>
+                <td>{ing.amount}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+        <h3>Instructions</h3>
+        <p>{this.props.recipe.instructions}</p>
       </div>
     );
   }
 }
 
 // Actions required to provide data for this component to render in sever side.
-RecipeDetailsPage.need = [params => {
+RecipeDetailsPage.need = [({ params }) => {
   return fetchRecipe(params.cuid);
 }];
 

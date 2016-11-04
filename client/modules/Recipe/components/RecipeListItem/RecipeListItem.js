@@ -22,7 +22,7 @@ function RecipeListItem(props) {
       <div className={styles.ingredients}>
         <span className={styles.label}>Ingredients:</span>
         {props.recipe.ingredients.map((ing, i) => (
-          <span className={styles.ingredient} key={i}>{ing.ingredient.singular}</span>
+          <span className={styles.ingredient} key={i}>{ing.ingredient}</span>
         ))}
       </div>
       <p className={styles.desc}>{props.recipe.description}</p>

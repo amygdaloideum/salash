@@ -43,13 +43,6 @@ export function searchRecipes(query) {
 
 export function addRecipeRequest(recipe) {
   return (dispatch) => {
-    return callApi('recipes', 'post', {
-      recipe: {
-        title: recipe.title,
-        description: recipe.description,
-        ingredients: recipe.ingredients.map(x => x._id),
-        categories: recipe.categories.map(x => x._id)
-      },
-    });
+    return callApi('recipes', 'post', { recipe });
   };
 }

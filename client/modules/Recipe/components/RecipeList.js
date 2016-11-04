@@ -8,10 +8,10 @@ function RecipeList(props) {
   return (
     <div>
       {
-        props.recipes.map(recipe => (
+        props.recipes.map((recipe, index) => (
           <RecipeListItem
             recipe={recipe}
-            key={recipe.cuid}
+            key={index}
           />
         ))
       }

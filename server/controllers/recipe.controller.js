@@ -11,7 +11,7 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getRecipes(req, res) {
-  Recipe.find().sort('-dateAdded').populate('ingredients.ingredient categories').exec((err, recipes) => {
+  Recipe.find().sort('-dateAdded').exec((err, recipes) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -26,7 +26,7 @@ export function getRecipes(req, res) {
  * @returns void
  */
 export function getRecipe(req, res) {
-  Recipe.findOne({ cuid: req.params.cuid }).populate('ingredients categories').exec((err, recipe) => {
+  Recipe.findOne({ cuid: req.params.cuid }).populate('author').exec((err, recipe) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -47,9 +47,9 @@ export function searchRecipes(req, res) {
   const categories = req.query.category.constructor === Array ? req.query.category : [req.query.category];
   const ingredients = req.query.ingredient.constructor === Array ? req.query.ingredient : [req.query.ingredient];
   Recipe.find({
-    categories: { $all: categories },
+    'categories': { $all: categories },
     'ingredients.ingredient': { $all: ingredients }
-  }).populate('ingredients.ingredient categories').exec((err, recipes) => {
+  }).populate('categories').exec((err, recipes) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -58,22 +58,32 @@ export function searchRecipes(req, res) {
 }
 
 export function addRecipe(req, res) {
-  if (!req.user) {
+  console.log(req.user);
+  if (!req.user || !req.user._id) {
     return res.status(401).end();
   }
 
-  if (!req.body.recipe.title || !req.body.recipe.description) {
+  const recipe = req.body.recipe;
+
+  if (!recipe.title 
+    || (!recipe.ingredients && recipe.ingredients.length)
+    || (!recipe.categories && recipe.categories.length)) {
     return res.status(403).end();
   }
 
-  const newRecipe = new Recipe(req.body.recipe);
+  const newRecipe = new Recipe(recipe);
 
   // Let's sanitize inputs
   newRecipe.title = sanitizeHtml(newRecipe.title);
-  newRecipe.name = sanitizeHtml(newRecipe.description);
+  newRecipe.description = sanitizeHtml(newRecipe.description);
+  newRecipe.instructions = sanitizeHtml(newRecipe.instructions);
+
+  newRecipe.ingredients = newRecipe.ingredients.map( ({ingredient, amount}) => ({ingredient: slug(ingredient), amount: slug(amount)}));
+  newRecipe.categories = newRecipe.categories.map( category => slug(category));
 
   newRecipe.slug = slug(newRecipe.title.toLowerCase(), { lowercase: true });
   newRecipe.cuid = cuid();
+  newRecipe.author = req.user._id;
   newRecipe.save((err, saved) => {
     if (err) {
       res.status(500).send(err);

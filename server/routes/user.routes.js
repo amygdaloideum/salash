@@ -7,4 +7,6 @@ router.route('/users/authenticate').post(UserController.validateUser);
 
 router.route('/users/signup').post(UserController.signupUser);
 
+router.route('/users/:id').get(UserController.getUser);
+
 export default router;

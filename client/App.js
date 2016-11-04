@@ -18,7 +18,7 @@ export default function App(props) {
     <Provider store={props.store}>
       <IntlWrapper>
         <Router history={syncHistoryWithStore(browserHistory, props.store)}>
-          {routes}
+          {routes(!!props.store.getState().auth.user._id)}
         </Router>
       </IntlWrapper>
     </Provider>

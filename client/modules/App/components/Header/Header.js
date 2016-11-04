@@ -18,27 +18,34 @@ const BigTitle = props => (
   </div>
 );
 
+const LoggedIn = ({ user }) => (
+  <Link to={`/user/${user._id}`} className={styles['logged-in']}>
+    <i className="fa fa-user-circle"></i>
+    {user.username}
+  </Link>
+);
+
 export function Header(props, context) {
   /*const languageNodes = props.intl.enabledLanguages.map(
     lang => <li key={lang} onClick={() => props.switchLanguage(lang)} className={lang === props.intl.locale ? styles.selected : ''}>{lang}</li>
   );*/
 
   return (
-    <div className={styles.header}>
-      {/*<div className={styles['language-switcher']}>
-        <ul>
-          <li>Detailed Search</li>
-          <li>Add Recipe</li>
-          <li>Login</li>
-        </ul>
-      </div>*/}
-      {
-        context.router.isActive('/', true) ? <BigTitle /> : <SmallTitle />
-      }
-    </div>
+    <header className={styles.header}>
+      <section>
+        <Link to="/" className={styles['nav-home']}>Salash!</Link>
+        <nav>
+          <a>Detailed Search</a>
+          <Link to="/create">Add Recipe</Link>
+        </nav>
+          {
+            props.user ? <LoggedIn user={props.user} /> : null
+          }
+      </section>
+    </header>
   );
 }
-
+//context.router.isActive('/', true) ? <BigTitle /> : <SmallTitle />
 Header.contextTypes = {
   router: React.PropTypes.object,
 };

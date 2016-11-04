@@ -18,7 +18,7 @@ export function getIngredients(req, res) {
 }
 
 export function getIngredientsByTitle(req, res) {
-  Ingredient.find({ "title": new RegExp(req.params.title, "i") }).exec((err, ingredients) => {
+  Ingredient.find({ "singular": new RegExp(req.params.title, "i") }).exec((err, ingredients) => {
     if (err) {
       res.status(500).send(err);
     }

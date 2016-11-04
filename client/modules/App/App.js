@@ -34,8 +34,8 @@ export class App extends Component {
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>
           <Helmet
-            title="Rawlib"
-            titleTemplate="%s - Blog App"
+            title="Salash!"
+            titleTemplate="%s - Raw recipes"
             meta={[
               { charset: 'utf-8' },
               {
@@ -49,6 +49,7 @@ export class App extends Component {
             ]}
           />
           <Header
+            user={this.props.user}
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
             toggleAddPost={this.toggleAddPostSection}
@@ -73,6 +74,7 @@ App.propTypes = {
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    user: store.auth.user
   };
 }
 

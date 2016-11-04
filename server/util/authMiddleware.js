@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/config'
+import cookies from 'cookies';
 
 export function isAuthenticated  (req, res, next){
   // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  const token = new cookies(req, res).get('token');
   if (token) {
     // verifies secret and checks exp
     jwt.verify(token, config.secret, (err, decoded) => {
@@ -11,7 +12,7 @@ export function isAuthenticated  (req, res, next){
         return res.json({ success: false, message: 'Failed to authenticate token.' });
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
+        req.user = decoded;
         next();
       }
     });

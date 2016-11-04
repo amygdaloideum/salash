@@ -10,6 +10,7 @@ import recipes from './modules/Recipe/RecipeReducer';
 import categories from './modules/Category/CategoryReducer';
 import intl from './modules/Intl/IntlReducer';
 import auth from './modules/Auth/AuthReducer';
+import user from './modules/User/UserReducer';
 import { routerReducer as routing } from 'react-router-redux';
 import { reducer as form } from 'redux-form'
 
@@ -21,6 +22,7 @@ export default combineReducers({
   posts,
   recipes,
   categories,
+  auth,
   intl,
-  auth
+  user
 });
