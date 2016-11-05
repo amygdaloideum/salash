@@ -50,6 +50,8 @@ let RecipeCreateForm = props => (
 
     <Field name="instructions" component={renderTextarea} label="Instructions" />
 
+    <Field name="imageUrl" component={renderInput} label="Image url" />
+
     {/*<div className={styles['text-container']}>
       <label>Instructions</label>
       <Field name="instructions" type="text" component={RecipeEditor} />

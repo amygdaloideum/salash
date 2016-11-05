@@ -14,7 +14,6 @@ import { getRecipes } from '../../RecipeReducer';
 
 class RecipeListPage extends Component {
   componentDidMount() {
-    console.log(this.props);
     this.props.dispatch(searchRecipes(this.props.location.query));
   }
 

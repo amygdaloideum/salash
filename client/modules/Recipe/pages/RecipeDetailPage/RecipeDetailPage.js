@@ -14,6 +14,9 @@ class RecipeDetailsPage extends Component {
   render() {
     return (
       <div className={styles['single-recipe']}>
+        {
+          this.props.recipe.imageUrl ? <div className={styles['image-wrapper']}><img src={this.props.recipe.imageUrl} /></div> : null
+        }
         <h1>{this.props.recipe.title}</h1>
         <div className={styles['categories']}>
           {this.props.recipe.categories.map((cat, i) => (
@@ -22,16 +25,18 @@ class RecipeDetailsPage extends Component {
         </div>
 
         <p>{this.props.recipe.description}</p>
-        
+
         <div>
           <h3>Ingredients</h3>
           <table>
-            {this.props.recipe.ingredients.map((ing, i) => (
-              <tr key={i}>
-                <td>{ing.ingredient}</td>
-                <td>{ing.amount}</td>
-              </tr>
-            ))}
+            <tbody>
+              {this.props.recipe.ingredients.map((ing, i) => (
+                <tr key={i}>
+                  <td>{ing.ingredient}</td>
+                  <td>{ing.amount}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
         <h3>Instructions</h3>
