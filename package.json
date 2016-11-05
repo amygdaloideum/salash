@@ -16,7 +16,8 @@
     "build:debug": "npm run clean && npm run build && npm run build:server-debug",
     "clean": "rimraf dist",
     "slate": "rimraf node_modules && npm install",
-    "lint": "eslint client server"
+    "lint": "eslint client server",
+    "heroku-postbuild": "npm run build && npm run build:server"
   },
   "pre-commit": [
     "lint",
