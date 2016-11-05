@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Field, Fields, FieldArray, reduxForm } from 'redux-form';
 //import RecipeEditor from '../RecipeEditor/RecipeEditor';
 import CategorySelect from '../../../Category/components/CategorySelect';
-import IngredientSelect from '../../../Ingredient/components/IngredientSelect';
+//import IngredientSelect from '../../../Ingredient/components/IngredientSelect';
 
 import styles from './RecipeCreateForm.css';
 
@@ -44,7 +44,7 @@ let RecipeCreateForm = props => (
       <Field name='categories' options={props.categories.map(c => c.title)} component={CategorySelect} />
     </div>
 
-    <FieldArray name="ingredients" component={IngredientSelect} />
+    {/*<FieldArray name="ingredients" component={IngredientSelect} />*/}
 
     <Field name="description" component={renderTextarea} label="Description" />
 
