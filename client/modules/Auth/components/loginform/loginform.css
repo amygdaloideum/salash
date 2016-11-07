@@ -1,0 +1,8 @@
+.login-form button {
+  margin-top: 5px;
+}
+
+.login-error {
+  padding-bottom: 20px;
+  color: red;
+}

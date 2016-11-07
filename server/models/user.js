@@ -7,17 +7,20 @@ const userSchema = new Schema({
   email: {
     type: String,
     lowercase: true,
-    unique: true,
-    required: true
+    unique: true
   },
   password: {
     type: String,
-    select: false,
-    required: true
+    select: false
   },
   username: {
-    type: String,
-    required: true
+    type: String
+  },
+  facebook: {
+    id: { type: String },
+    token: { type: String },
+    email: { type: String },
+    name: { type: String },
   }
 }, { toJSON: { virtuals: true } });
 

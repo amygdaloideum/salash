@@ -39,7 +39,7 @@ export function Header(props, context) {
           <Link to="/create">Add Recipe</Link>
         </nav>
           {
-            props.user ? <LoggedIn user={props.user} /> : null
+            props.user && props.user._id ? <LoggedIn user={props.user} /> : null
           }
       </section>
     </header>

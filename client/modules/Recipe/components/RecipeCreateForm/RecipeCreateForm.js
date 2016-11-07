@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Field, Fields, FieldArray, reduxForm } from 'redux-form';
 //import RecipeEditor from '../RecipeEditor/RecipeEditor';
 import CategorySelect from '../../../Category/components/CategorySelect';
-//import IngredientSelect from '../../../Ingredient/components/IngredientSelect';
+import { renderTextarea, renderInput} from '../../../../components/form/formInputs';
+import IngredientSelect from '../../../Ingredient/components/IngredientSelect';
 
 import styles from './RecipeCreateForm.css';
 
@@ -14,26 +15,6 @@ const validate = values => {
   return errors;
 }
 
-const renderInput = ({ input, label, type, meta: { touched, error } }) => (
-  <div className={styles['text-container']}>
-    <label>{label}</label>
-    <div>
-      <input {...input} type={type} placeholder={label} />
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-);
-
-const renderTextarea = ({ input, label, type, meta: { touched, error } }) => (
-  <div className={styles['text-container']}>
-    <label>{label}</label>
-    <div>
-      <textarea {...input} type={type} placeholder={label} />
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-);
-
 let RecipeCreateForm = props => (
   <form onSubmit={props.handleSubmit(props.handleCreate)} className={styles['create-form']}>
 
@@ -44,7 +25,7 @@ let RecipeCreateForm = props => (
       <Field name='categories' options={props.categories.map(c => c.title)} component={CategorySelect} />
     </div>
 
-    {/*<FieldArray name="ingredients" component={IngredientSelect} />*/}
+    <FieldArray name="ingredients" component={IngredientSelect} />
 
     <Field name="description" component={renderTextarea} label="Description" />
 

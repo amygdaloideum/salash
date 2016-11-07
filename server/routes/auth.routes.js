@@ -1,33 +1,16 @@
 import { Router } from 'express';
-import User from '../models/user';
-import { isAuthenticated } from '../util/authMiddleware';
-import jwt from 'jsonwebtoken';
+import * as AuthController from '../controllers/auth.controller'; 
+import passport from 'passport';
 
 const router = new Router();
 
-router.route('/setup').get((req, res) => {
-  var nick = new User({
-    name: 'Nick Cerminara',
-    email: 'test@test.se',
-    admin: true
-  });
+router.route('/auth/facebook').get(passport.authenticate('facebook', { display: 'popup' }));
 
-  nick.generateHash('password', (err, hash) => {
-    if(err) {
-      return done(err);
-    }
-
-    nick.password = hash;
-
-    nick.save(function(err) {
-      if (err) throw err;
-
-      console.log('User saved successfully');
-      res.json({ success: true });
-    });
-  });
+router.route('/auth/facebook/callback').get(passport.authenticate('facebook', {session: false, failureRedirect : '/login'}), (req, res) => {
+ var token = req.user.token;
+ return res.redirect(`/auth/facebook/callback?token=${token}`);
 });
 
-router.route('/authenticate').post((req, res) => {});
+router.route('/auth/unwraptoken').get(AuthController.unwrapToken);
 
 export default router;

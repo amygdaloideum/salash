@@ -1,0 +1,15 @@
+.wrapper {
+  width: 300px;
+}
+
+.wrapper > a {
+  margin-top: 10px;
+}
+
+.separator {
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  color: #888;
+  margin-top:10px;
+}

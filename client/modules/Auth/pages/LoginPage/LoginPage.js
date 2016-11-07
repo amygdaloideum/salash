@@ -1,34 +1,36 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Field, reduxForm } from 'redux-form';
-import { loginUserRequest } from '../../AuthActions';
+import { loginUserRequest, facebookLoginRequest } from '../../AuthActions';
+import { browserHistory } from 'react-router';
+
+import LoginForm from '../../components/loginform/loginform';
+import { FacebookButton, GoogleButton, TwitterButton } from '../../components/SocialSignInButtons/SocialSignInButtons';
+
+import { getMessage } from '../../AuthReducer';
 
 // Import Style
-//import styles from './LoginPage.css';
-
-let LoginForm = ({ handleSubmit, login }) => (
-  <form onSubmit={handleSubmit(login)}>
-    <h3>Login</h3>
-    <Field name="email" component="input" type="text" />
-    <Field name="password" component="input" type="password" />
-    <button type="submit">Login</button>
-  </form>
-)
-
-LoginForm = reduxForm({ form: 'loginForm' })(LoginForm);
+import styles from './LoginPage.css';
 
 class LoginPage extends Component {
 
   handleLogin = ({email, password}) => {
-    this.props.dispatch(loginUserRequest({email, password}));
+    this.props.dispatch(loginUserRequest({ email, password })).then(() => browserHistory.push('/'));
+  };
+
+  handleFacebookLogin = () => {
+    this.props.dispatch(facebookLoginRequest());
   };
 
   render() {
     return (
-      <div>
+      <div className={styles.wrapper}>
         <Helmet title='Login' />
-        <LoginForm login={this.handleLogin} />
+        <LoginForm login={this.handleLogin} facebookLogin={this.handleFacebookLogin} message={this.props.message} />
+        <div className={styles.separator}> or</div>
+        <FacebookButton auth={this.handleFacebookLogin} />
+        <GoogleButton />
+        <TwitterButton auth={facebookLoginRequest} />
       </div>
     )
   }
@@ -36,7 +38,9 @@ class LoginPage extends Component {
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
-  return {};
+  return {
+    message: getMessage(state)
+  };
 }
 
 LoginPage.propTypes = {};

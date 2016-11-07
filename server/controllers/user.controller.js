@@ -20,8 +20,8 @@ export function validateUser(req, res) {
     if (!user) {
       res.json({ success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
-      user.validPassword(req.body.password, (err, result) => {
-        if(!res){
+      user.validPassword(req.body.password, (err, isValid) => {
+        if(!isValid){
           res.json({ success: false, message: 'Authentication failed. Wrong password.' });
         } else {
           const formattedUser = getUserToSign(user);

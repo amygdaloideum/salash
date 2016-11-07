@@ -34,6 +34,10 @@ body .Select-control{
 	border:none;
 }
 
+h1 {
+	font-weight: 300;
+}
+
 div, a, p, section {
 	font-weight: 300;
 	text-decoration: none;

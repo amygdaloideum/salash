@@ -58,7 +58,6 @@ export function searchRecipes(req, res) {
 }
 
 export function addRecipe(req, res) {
-  console.log(req.user);
   if (!req.user || !req.user._id) {
     return res.status(401).end();
   }
