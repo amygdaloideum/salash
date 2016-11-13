@@ -2,19 +2,23 @@ import React, { PropTypes } from 'react';
 
 // Import Components
 import RecipeListItem from './RecipeListItem/RecipeListItem';
-//import styles from './RecipeList.css';
+import styles from './RecipeList.css';
 
 function RecipeList(props) {
   return (
-    <div>
-      {
-        props.recipes.map((recipe, index) => (
-          <RecipeListItem
-            recipe={recipe}
-            key={index}
-          />
-        ))
-      }
+    <div className={styles.recipelist}>
+      <div className={styles.meta}>
+        <div className={styles.affirmation}>
+          you searched for smoothies with tomato and banana
+      </div>
+        <div className={styles.optionbar}>
+          <span>most loved</span>
+          <a>all time</a>
+          <a>this month</a>
+          <a>this week</a>
+        </div>
+      </div>
+      {props.recipes.map((recipe, index) => (<RecipeListItem recipe={recipe} key={index} />))}
     </div>
   );
 }

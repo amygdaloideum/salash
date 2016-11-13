@@ -15,9 +15,13 @@
 }
 
 body {
-  /*background: linear-gradient(125deg, #134E5E, #71B280);*/
+  background: #ECF0F1;
+	/*background: #fff url('./modules/App/gradient-background.jpg');*/
+	background-size: cover;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
+	font-weight: 300;
+	color: $ebonyclay;	
 }
 
 html {
@@ -34,11 +38,7 @@ body .Select-control{
 	border:none;
 }
 
-h1 {
-	font-weight: 300;
-}
-
-div, a, p, section {
-	font-weight: 300;
+div, a, p, section, h1 {
 	text-decoration: none;
+	font-weight: 300;	
 }

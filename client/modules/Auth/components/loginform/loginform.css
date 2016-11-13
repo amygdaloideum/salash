@@ -4,5 +4,30 @@
 
 .login-error {
   padding-bottom: 20px;
-  color: red;
+  color: #F16767;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+.login-form > a {
+  font-size: 0.9em;
+}
+
+.subactions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.subactions > a {
+  cursor: pointer;
+  text-decoration: underline;  
+  margin: 25px 5px 10px 5px;
+  color: #22313F;  
+}
+
+.signup {
+
+}
+
+.forgot {
 }

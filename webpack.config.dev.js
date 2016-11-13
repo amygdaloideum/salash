@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var cssnext = require('postcss-cssnext');
 var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
+var vars = require('postcss-simple-vars')
+var colors = require('./client/config/colors');
 
 module.exports = {
   //devtool: 'cheap-module-eval-source-map',
@@ -77,6 +79,7 @@ module.exports = {
   ],
 
   postcss: () => [
+    vars({ variables: colors }),
     postcssFocus(),
     cssnext({
       browsers: ['last 2 versions', 'IE > 10'],

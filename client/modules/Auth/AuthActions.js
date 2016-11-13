@@ -2,6 +2,8 @@ import callApi from '../../util/apiCaller';
 import cookie from 'react-cookie';
 import { push } from 'react-router-redux'
 import { getAllParams } from '../../util/parse-url';
+import { browserHistory } from 'react-router';
+
 
 // Export Constants
 export const AUTH_USER = 'AUTH_USER';
@@ -31,6 +33,7 @@ export function loginUserRequest({email, password}) {
       if (res.success) {
         cookie.save('token', res.token, { path: '/' });
         dispatch(loginUser(res.token, res.user));
+        browserHistory.push('/')
       } else {
         dispatch(authError(res.message));
       }

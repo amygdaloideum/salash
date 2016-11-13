@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import styles from './CategorySelect.css';
+
 class CategorySelect extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +23,10 @@ class CategorySelect extends Component {
   render() {
     const { fields } = this.props;
     return (
-      <div>
+      <div className={styles.categories}>
+        <label>Categories</label>
         {this.props.options.map((option, i) => (
-          <div key={i}>
+          <div className={styles.row} key={i}>
             <input
               type="checkbox"
               value={option}

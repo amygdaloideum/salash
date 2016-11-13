@@ -7,7 +7,7 @@ import styles from './RecipeQuickSearch.css';
 let RecipeQuickSearch = props => (
   <form onSubmit={props.handleSubmit(props.handleQuickSearch)} className={styles['search-form']}>
     <div>
-      Show me
+      show me
         <Field name="category" component="select" className={styles['select-category']}>
         {props.categories.map((category, i) => {
           return <option key={i} value={category._id}>{category.plural}</option>;
@@ -24,8 +24,8 @@ let RecipeQuickSearch = props => (
     </div>
     <div className={styles['button-container']}>
       <div onClick={props.handleSubmit(props.handleQuickSearch)} className={styles['recipe-search-button']}>
-        Go!
-        </div>
+        go
+      </div>
     </div>
   </form>
 );
@@ -43,7 +43,7 @@ RecipeQuickSearch = reduxForm({
   initialValues: {
     category: 'smoothie',
     ingredient1: 'tomato',
-    ingredient2: 'mango'
+    ingredient2: 'banana'
   }
 })(RecipeQuickSearch);
 

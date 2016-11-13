@@ -1,12 +1,13 @@
 .footer{
-  padding: 100px 0;
   max-width: 980px;
   margin: auto;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .footer span{
   font-size: 1.2em;
-  color: lightpink;
+  color: #EF4836;
 }
 
 .footer p{

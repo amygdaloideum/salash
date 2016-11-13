@@ -1,0 +1,15 @@
+.categories {
+}
+
+.categories label {
+  font-size: 1.2em;
+  color: $ebonyclay;
+}
+
+.row {
+  padding: 3px;
+}
+
+.categories input[type=checkbox] {
+  margin: 2px 5px 2px 10px;
+}

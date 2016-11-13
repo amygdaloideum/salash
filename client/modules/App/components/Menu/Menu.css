@@ -1,0 +1,62 @@
+.menu {
+  color: $ebonyclay;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.menu > a {
+  display: flex;
+  text-align: center;
+  flex: 1 0 0px;
+  flex-direction: column;  
+  padding: 25px 10px 25px 10px;
+  color: $ebonyclay;  
+  /*border-top: 1px solid $ebonyclay;*/
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+
+.menu > a:nth-child(1) {
+  color: #15C2D2;
+}
+
+.menu > a:nth-child(2) {
+  color: #26C281;
+}
+
+.menu > a:nth-child(3) {
+  color: #F4B350;
+}
+
+.menu > a:nth-child(4) {
+  color: #FF7043;
+}
+
+.menu i {
+  font-size: 2em;
+}
+
+.menu a > div {
+  width: 100%;
+}
+
+.menu > a:hover {
+  color: grey;
+}
+
+@media (max-width: 450px) {
+  .menu {
+    flex-direction: row;
+    justify-content: space-around;    
+  }
+
+  .menu > a {
+    font-size: 1.2em;
+  }
+
+  .menu > a i {
+  }
+}

@@ -15,7 +15,10 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 const renderIngredients = ({ fields }) => (
   <div className={styles.container} >
-    <label>Ingredients</label> <button type='button' onClick={() => fields.push()}>Add</button>
+    <div className={styles.title}>
+      <label>Ingredients</label>
+      <a type='button' onClick={() => fields.push()}><i className="material-icons">add</i>Add</a>
+    </div>
     <ul className={styles['ingredients-list']}>
       {fields.map((field, index) =>
         <li key={index}>
@@ -30,7 +33,7 @@ const renderIngredients = ({ fields }) => (
             type="text"
             component={renderField}
             label="ingredient" />
-          <button type="button" onClick={() => fields.remove(index)}>remove</button>
+          <a className={styles.remove} type="button" onClick={() => fields.remove(index)}><i className="material-icons">clear</i>remove</a>
         </li>
       )}
     </ul>

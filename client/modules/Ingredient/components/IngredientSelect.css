@@ -3,14 +3,45 @@
   padding: 10px;
 }
 
-.container label {
-  font-weight: 600;
+.row input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid $turquoise;
+  outline: none;
+  padding: 3px;
+}
+
+.remove {
+  cursor: pointer;
+  color: $red;
+}
+
+.remove i {
+  font-size: 1.5em;
+}
+
+.title label {
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.title, .title a, .remove, .ingredients-list li {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title a {
+  margin-left: 10px;
+  color: $green;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ingredients-list li {
+  display: flex;
 }
 
 .ingredients-list {
   list-style-type: none;
-}
-
-.container {
- padding: 10px;
 }

@@ -1,61 +1,71 @@
 .search-form{
   font-size: 3.2em;
   font-weight: 300;
+  color: $ebonyclay;
 }
 
 .search-form input, select{
   border-width: 0;
   border-bottom-width: 2px;
   width: 250px;
+  background: transparent;
   font-size: 1em;
   outline: 0;
   margin-left: 10px;
+  color: $ebonyclay;
+  border-color: $ebonyclay;
 }
 
 .select-category{
-  color: #EC4863;
-  border-color: #EC4863;
   width: 300px;
 }
 
-/*A73E5C*/
-
-.input-ingredient1{
-    color: #A73E5C;
-    border-color: #A73E5C;  
-}
-/*EC4863*/
-
-.input-ingredient2{
-    color: #A73E5C;
-    border-color: #A73E5C;    
-}
-/*FF733F*/
-
 .button-container{
   padding-top: 25px;
+  text-align: right;
 }
 
 .recipe-search-button{
-  padding: 5px 40px;
+  text-align: center;
   border-radius: 10px;
-  width: 150px;
-  color: #FFF;
-  background-color: #EC4863;
+  width: 2.5em;
+  color: $ebonyclay;
+  background: #26C281;
+  height: 1.5em;
+  line-height: 1.4em;
   text-decoration: none;
-  border: none;
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
   text-align: center;
   cursor: pointer;
+  float: right;
+  transition: all 0.1s linear;
 }
 
-@media (max-width: 767px){
+.recipe-search-button:hover {
+  background: #3fd999;
+}
+
+@media (max-width: 650px){
   .search-form{
     font-size: 2em;
   }
 
   .input-ingredient, .select-category{
+    width: 170px;
+  }
+
+  .recipe-search-button { 
+    //width: 100%;
+  }
+}
+
+@media (max-width: 359px) {
+  .search-form{
+    font-size: 1.5em;
+  }
+
+   .input-ingredient, .select-category, .search-form input {
     width: 150px;
   }
 }

@@ -101,8 +101,9 @@ const renderFullPage = (html, initialState) => {
 
   ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
-  <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
+  <link rel="shortcut icon" href="https://s14.postimg.org/ktgi8n2u9/salash_favicon.png" type="image/png" />
   </head>
   <body>
   <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>

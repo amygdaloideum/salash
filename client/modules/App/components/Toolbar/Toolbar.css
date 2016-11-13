@@ -1,0 +1,65 @@
+.toolbar {
+  max-width: 840px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 1px solid #D2D7D3;
+}
+
+.toolbar > a {
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: row;  
+  justify-content: center;
+  padding: 25px 10px 25px 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+
+.toolbar > .logo {
+  padding: 0;
+  color: #F16767
+}
+
+.logo h1 {
+  line-height: 1.5em;
+}
+
+.toolbar a i {
+  padding: 4px 5px 0 0;
+}
+
+.toolbar > a:nth-child(2) {
+  color: #15C2D2;
+}
+
+.toolbar > a:nth-child(3) {
+  color: #26C281;
+}
+
+.toolbar > a:nth-child(4) {
+  color: #F4B350;
+}
+
+.toolbar > a:nth-child(5) {
+  color: #FF7043;
+}
+
+.toolbar a > div {
+}
+
+.toolbar > a:hover{
+  color: grey;
+}
+
+.toolbar > a:last-child {
+  /*border-bottom: 1px solid $flamingo;*/
+}
+
+@media (max-width: 700px) {
+  .toolbar a {
+    font-size: 1.2em;
+  }
+}

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Field, Fields, FieldArray, reduxForm } from 'redux-form';
 //import RecipeEditor from '../RecipeEditor/RecipeEditor';
 import CategorySelect from '../../../Category/components/CategorySelect';
-import { renderTextarea, renderInput} from '../../../../components/form/formInputs';
+import { renderTextarea, renderInput, SubmitButton} from '../../../../components/form/formInputs';
 import IngredientSelect from '../../../Ingredient/components/IngredientSelect';
 
 import styles from './RecipeCreateForm.css';
@@ -15,14 +15,13 @@ const validate = values => {
   return errors;
 }
 
-let RecipeCreateForm = props => (
-  <form onSubmit={props.handleSubmit(props.handleCreate)} className={styles['create-form']}>
+let RecipeCreateForm = ({ handleSubmit, handleCreate, categories, invalid, submitting, pristine }) => (
+  <form onSubmit={handleSubmit(handleCreate)} className={styles['create-form']}>
 
-    <Field name="title" component={renderInput} type="text" label="Title" />
+    <Field name="title" icon="fa-pencil-square-o" component={renderInput} type="text" label="Title" />
 
     <div className={styles['text-container']}>
-      <label>Categories</label>
-      <Field name='categories' options={props.categories.map(c => c.title)} component={CategorySelect} />
+      <Field name='categories' options={categories.map(c => c.title)} component={CategorySelect} />
     </div>
 
     <FieldArray name="ingredients" component={IngredientSelect} />
@@ -31,14 +30,13 @@ let RecipeCreateForm = props => (
 
     <Field name="instructions" component={renderTextarea} label="Instructions" />
 
-    <Field name="imageUrl" component={renderInput} label="Image url" />
+    <Field name="imageUrl" icon="fa-picture-o" component={renderInput} label="Image url" />
 
     {/*<div className={styles['text-container']}>
       <label>Instructions</label>
       <Field name="instructions" type="text" component={RecipeEditor} />
     </div>*/}
-
-    <button type="submit" disabled={props.pristine || props.submitting}>Submit</button>
+    <SubmitButton text="add recipe" disabled={{ invalid, submitting, pristine }} />
   </form>
 );
 

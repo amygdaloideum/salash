@@ -25,7 +25,8 @@ export class RecipeCreationPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.create}>
+        <h1>add recipe</h1>
         <RecipeCreateForm handleCreate={this.handleCreate} categories={this.props.categories}/>
       </div>
     );

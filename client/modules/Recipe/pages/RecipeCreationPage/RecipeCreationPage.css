@@ -1,23 +1,4 @@
-.create-form{
-  display: flex;
-  flex-direction: column;
-}
-
-.create-form > * {
-    margin-top:25px;
-}
-
-.create-title{
-}
-
-.create-input{
-  width: 300px;
-}
-
-.create-button{
-
-}
-
-.select{
-  width: 300px;
+.create h1 {
+  text-align: center;
+  padding: 20px;
 }

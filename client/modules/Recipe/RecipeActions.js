@@ -1,5 +1,7 @@
 import callApi from '../../util/apiCaller';
 import { build } from '../../util/queryBuilder';
+import { browserHistory } from 'react-router';
+
 // Export Constants
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const ADD_RECIPES = 'ADD_RECIPES';
@@ -43,6 +45,8 @@ export function searchRecipes(query) {
 
 export function addRecipeRequest(recipe) {
   return (dispatch) => {
-    return callApi('recipes', 'post', { recipe });
+    return callApi('recipes', 'post', { recipe }).then(res => {
+      browserHistory.push('/created');
+    });
   };
 }

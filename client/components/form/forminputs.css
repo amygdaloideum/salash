@@ -1,4 +1,5 @@
 .text-container{
+  color: #22313F;
 }
 
 .label-row {
@@ -8,7 +9,7 @@
 .text-container label{
   font-weight: 300;
   font-size: 1.2em;
-  color: #555;
+  color: #22313F;
 }
 
 .input-field{
@@ -19,67 +20,82 @@
 .text-container input {
   padding: .7rem;
   border: none;
-  background: #eee;
   font-size: 1em;
-  color: #555;
+  color: #22313F;
   outline: 0;
   width: 100%;
   transition: all 0.2s linear;
-}
-
-.text-container input:focus {
-  background: #f5f5f5;
-  box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
-}
-
-.text-container input:hover {
-  background: #f5f5f5;
-}
-
-.text-container input:invalid {
-  background: red;
+  background: transparent;
+  border: 1px solid #22313F;
+  border-left-width: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .text-container i {
   text-align: center;
   padding: .7rem;
-  background: #ddd;
-  color: #EC4863;
-  width: 40px; 
+  background: transparent;
+  color:#22313F;
+  width: 40px;
+  border: 1px solid #22313F;
+  border-right-width: 0;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.text-container input:focus {
+  box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
+}
+
+.text-container input:hover {
+}
+
+.text-container input:invalid {
+  background: #E26A6A;
 }
 
 .text-container textarea{
   resize: none;
-  height: 50px;
-  min-height: 50px;
+  min-height: 70px;
   width: 500px;
+  background: white;
+  outline: none;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  border: 1px solid #D2D7D3;
 }
 
 .submit-button {
   width: 100%;
   border: none;
-  background: #EC4863;
+  background: #ee5f77;
   color: white;
   padding: .7rem;
-  text-transform: uppercase;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 300;
+  font-family: 'Roboto';
   outline: none;
   cursor: pointer;
   transition: all 0.2s linear;  
+  border-radius: 10px;
 }
 
 .submit-button:disabled {
-  background: #555;
+  background: #22313F;
   cursor: default;
+}
+.submit-button:enabled {
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.3);  
 }
 
 .submit-button:enabled:hover {
   background: #ee5f77 ;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,.3);  
 }
 
 .validation-error {
-  color: red;
   float: right;
+  color: #F16767;
 }

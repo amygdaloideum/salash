@@ -30,7 +30,6 @@ function RecipeListItem({ recipe  }) {
           ))}
         </div>
         <p className={styles.desc}>{recipe.description}</p>
-        <div className={styles.divider}></div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import styles from './App.css';
 // Import Components
 import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
-import Header from './components/Header/Header';
+import Toolbar from './components/Toolbar/Toolbar';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
@@ -15,9 +15,10 @@ import { toggleAddPost } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
 export class App extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.state = { isMounted: false };
+    this.context = context;
   }
 
   componentDidMount() {
@@ -34,8 +35,8 @@ export class App extends Component {
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>
           <Helmet
-            title="Salash!"
-            titleTemplate="%s - Raw recipes"
+            title="salash"
+            titleTemplate="%s - raw recipes"
             meta={[
               { charset: 'utf-8' },
               {
@@ -48,12 +49,7 @@ export class App extends Component {
               },
             ]}
           />
-          <Header
-            user={this.props.user}
-            switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-            intl={this.props.intl}
-            toggleAddPost={this.toggleAddPostSection}
-          />
+          { !this.context.router.isActive('/', true) ? <Toolbar user={this.props.user} /> : null}
           <div className={styles.container}>
             {this.props.children}
           </div>
@@ -63,6 +59,10 @@ export class App extends Component {
     );
   }
 }
+
+App.contextTypes = {
+  router: React.PropTypes.object,
+};
 
 App.propTypes = {
   children: PropTypes.object.isRequired,

@@ -20,7 +20,9 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
   require('./modules/Recipe/pages/RecipeListPage/RecipeListPage');
   require('./modules/Recipe/pages/RecipeSearchPage/RecipeSearchPage');
+  require('./modules/App/pages/StartPage/StartPage');
   require('./modules/Recipe/pages/RecipeCreationPage/RecipeCreationPage');
+  require('./modules/Recipe/pages/RecipeCreatedPage/RecipeCreatedPage');
   require('./modules/Recipe/pages/RecipeDetailPage/RecipeDetailPage');
   require('./modules/User/pages/UserPage');
   require('./modules/Auth/pages/LoginPage/LoginPage');
@@ -44,7 +46,7 @@ export default auth => (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Recipe/pages/RecipeSearchPage/RecipeSearchPage').default);
+          cb(null, require('./modules/App/pages/StartPage/StartPage').default);
         });
       }}
     />
@@ -85,6 +87,15 @@ export default auth => (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Recipe/pages/RecipeCreationPage/RecipeCreationPage').default);
+        });
+      }}
+      onEnter={(nextState, replace) => requireAuth(nextState, replace, auth)}
+    />
+    <Route
+      path="/created"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Recipe/pages/RecipeCreatedPage/RecipeCreatedPage').default);
         });
       }}
       onEnter={(nextState, replace) => requireAuth(nextState, replace, auth)}

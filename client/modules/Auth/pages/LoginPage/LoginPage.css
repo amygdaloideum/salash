@@ -1,15 +1,59 @@
 .wrapper {
-  width: 300px;
+  width: 100%;
 }
 
-.wrapper > a {
-  margin-top: 10px;
+.loginwrapper {
+  max-width: 400px;
+  margin: auto;  
+}
+
+.local {
+  margin-top: 30px;
+  /*background: #f39c12;*/
+  padding-bottom: 20px;
+}
+
+.social {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginwrapper header {
+  color: #22313F;
+  text-align: center;
+  padding: 20px;
+  font-size: 2em;
+  padding-bottom: 0;
+}
+
+.loginwrapper > a {
+  margin: 10px;
+}
+
+.form {
+  padding: 20px;
+  border-bottom: 1px solid #D2D7D3;
+}
+
+.loginwrapper > div {
+  text-align: center;
+  font-size: 1.5em;
 }
 
 .separator {
   height: 25px;
   text-align: center;
   line-height: 25px;
-  color: #888;
+  color: #ecf0f1;
   margin-top:10px;
+}
+
+@media (max-width: 400px) {
+  .local {
+    margin-top: 0;
+  }
+  .form {
+    padding: 0 10px 0 10px;
+  }
 }
