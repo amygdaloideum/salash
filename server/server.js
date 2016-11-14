@@ -10,6 +10,7 @@ import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 import passport from 'passport';
 import { getFacebookStrategy } from './config/auth';
+import { snippet as googleAnalytics } from './util/googleAnalytics';
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -104,6 +105,7 @@ const renderFullPage = (html, initialState) => {
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
   <link rel="shortcut icon" href="https://s14.postimg.org/ktgi8n2u9/salash_favicon.png" type="image/png" />
+  ${process.env.NODE_ENV === 'production' ? googleAnalytics : ''}
   </head>
   <body>
   <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
