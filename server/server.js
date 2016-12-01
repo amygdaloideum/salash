@@ -3,7 +3,6 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 
 import Express from 'express';
 import compression from 'compression';
-import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import path from 'path';
@@ -39,30 +38,14 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './routes/post.routes';
 import recipes from './routes/recipe.routes';
 import ingredients from './routes/ingredient.routes';
 import categories from './routes/category.routes';
 import auth from './routes/auth.routes';
 import users from './routes/user.routes';
 import interactions from './routes/interaction.routes'
-import dummyData from './dummyData';
 import serverConfig from './config/config'
 import { getInitialState, isAuthenticated } from './util/authUtils';
-
-// Set native promises as mongoose promise
-mongoose.Promise = global.Promise;
-
-// MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, (error) => {
-  if (error) {
-    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
-    throw error;
-  }
-
-  // feed some dummy data in DB.
-  dummyData();
-});
 
 app.set('superSecret', 'celestialPisslord');
 
@@ -76,7 +59,6 @@ app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(morgan('dev'));
 app.use(passport.initialize());
 
-app.use('/api', posts);
 app.use('/api', recipes);
 app.use('/api', ingredients);
 app.use('/api', categories);

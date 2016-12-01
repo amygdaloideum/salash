@@ -1,5 +1,4 @@
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import User from '../models/user';
 import jwt from 'jsonwebtoken';
 import config from '../config/config'
 import { getSession } from '../util/dbUtils';
@@ -32,33 +31,6 @@ export function getFacebookStrategy() {
         return done(null, {user, token});
       });
 
-    });
-  })
-}
-
-export function getFacebookStrategyOld() {
-  return new FacebookStrategy(profiles.facebookAuth, (accessToken, refreshToken, profile, done) => {
-    process.nextTick(() => {
-      User.findOne({ 'facebook.id': profile.id }, (err, user) => {
-
-        if (user) {
-          const token = signToken(user, config.secret);
-          return done(null, {user, token});
-        }
-
-        const newUser = new User();
-        newUser.facebook.id = profile.id;                  
-        newUser.facebook.token = accessToken;              
-        newUser.facebook.name = profile.displayName;
-
-
-        newUser.save((err, saved) => {
-          console.log(saved);
-          if(err){ throw err; }
-          const token = signToken(saved, config.secret);          
-          return done(null, {user: saved, token});
-        });
-      });
     });
   })
 }

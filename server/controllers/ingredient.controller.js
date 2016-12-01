@@ -1,4 +1,3 @@
-import Ingredient from '../models/ingredient';
 import cuid from 'cuid';
 import slug from 'limax';
 
@@ -9,19 +8,5 @@ import slug from 'limax';
  * @returns void
  */
 export function getIngredients(req, res) {
-  Ingredient.find().exec((err, Ingredients) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ Ingredients });
-  });
-}
 
-export function getIngredientsByTitle(req, res) {
-  Ingredient.find({ "singular": new RegExp(req.params.title, "i") }).exec((err, ingredients) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ ingredients });
-  });
 }

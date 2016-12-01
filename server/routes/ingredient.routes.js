@@ -6,7 +6,4 @@ const router = new Router();
 // Get all Posts
 router.route('/ingredients').get(IngredientController.getIngredients);
 
-// Search posts by title
-router.route('/ingredients/:title').get(IngredientController.getIngredientsByTitle);
-
 export default router;

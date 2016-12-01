@@ -1,20 +1,14 @@
-import User from '../models/user';
 import jwt from 'jsonwebtoken';
 import config from '../config/config'
 
 const getUserToSign = ({_id, email, username, recipes}) => ({_id, email, username, recipes});
 
 export function getUser(req, res) {
-  User.findById(req.params.id).populate('recipes').exec((err, user) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ user });
-  });
+
 }
 
 export function validateUser(req, res) {
-  const findUserCallback = (err, user) => {
+  /*const findUserCallback = (err, user) => {
     if (err){ throw err; }
 
     if (!user) {
@@ -39,7 +33,7 @@ export function validateUser(req, res) {
       });
     }
   }
-  User.findOne({ email: req.body.email }).select('+password').exec(findUserCallback);
+  User.findOne({ email: req.body.email }).select('+password').exec(findUserCallback);*/
 }
 
 export function signupUser(req, res) {
@@ -60,22 +54,4 @@ export function signupUser(req, res) {
   if (!user.password) { // Return error if no password provided
     return res.status(422).send({ error: 'You must enter a password.' });
   }
-
-  User.findOne({ email: user.email}, (err, existingUser) => {
-    if (err) { return next(err); }
-
-    if (existingUser) {
-      return res.status(422).send({ error: 'That email address is already in use.' });
-    }
-
-    let newUser = new User(req.body.user);
-    newUser.save((err, saved) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send(err);
-      }
-      res.json({ user: saved });
-    });
-
-  });
 }
