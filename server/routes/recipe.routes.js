@@ -1,19 +1,14 @@
 import { Router } from 'express';
 import * as RecipeController from '../controllers/recipe.controller';
-import { isAuthenticated } from '../util/authMiddleware'
+import { isAuthenticated, getUserFromToken } from '../util/authMiddleware'
+import { getSession } from '../util/dbUtils';
 
 const router = new Router();
 
-// Get all Posts
-router.route('/recipes').get(RecipeController.getRecipes);
-
-// Search posts by title
-router.route('/recipes/search/:title').get(RecipeController.getRecipesByTitle);
-
-router.route('/recipes/search/').get(RecipeController.searchRecipes);
+router.route('/recipes/search/').get(getUserFromToken, RecipeController.searchRecipes);
 
 // Get one post by cuid
-router.route('/recipes/:cuid').get(RecipeController.getRecipe);
+router.route('/recipes/:cuid').get(getUserFromToken, RecipeController.getRecipe);
 
 // Search posts by title
 router.route('/recipes').post(isAuthenticated, RecipeController.addRecipe);

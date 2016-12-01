@@ -10,7 +10,7 @@ let RecipeQuickSearch = props => (
       show me
         <Field name="category" component="select" className={styles['select-category']}>
         {props.categories.map((category, i) => {
-          return <option key={i} value={category._id}>{category.plural}</option>;
+          return <option key={i} value={category._id}>{`${category.name}s`}</option>;
         })}
       </Field>
     </div>
@@ -32,8 +32,7 @@ let RecipeQuickSearch = props => (
 
 RecipeQuickSearch.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    plural: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
   })).isRequired,
   handleQuickSearch: PropTypes.func.isRequired,
 };

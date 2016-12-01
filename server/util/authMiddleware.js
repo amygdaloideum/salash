@@ -4,7 +4,7 @@ import cookies from 'cookies';
 
 export function isAuthenticated  (req, res, next){
   // check header or url parameters or post parameters for token
-  const token = new cookies(req, res).get('token');
+  const token = new cookies(req, res).get('token') || req.headers.authorization;
   if (token) {
     // verifies secret and checks exp
     jwt.verify(token, config.secret, (err, decoded) => {
@@ -24,5 +24,24 @@ export function isAuthenticated  (req, res, next){
         message: 'No token provided.'
     });
 
+  }
+}
+
+export function getUserFromToken  (req, res, next){
+  // check header or url parameters or post parameters for token
+  const token = new cookies(req, res).get('token') || req.headers.authorization;
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token, config.secret, (err, decoded) => {
+      if (err) {
+        next();
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.user = decoded;
+        next();
+      }
+    });
+  } else {
+    next();
   }
 }

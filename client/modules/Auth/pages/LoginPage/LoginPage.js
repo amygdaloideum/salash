@@ -24,17 +24,19 @@ class LoginPage extends Component {
   render() {
     return (
       <div className={styles.wrapper}>
+        <Helmet title='Login' />
         <div className={styles.loginwrapper}>
-          <section className={styles.local}>
-            <Helmet title='Login' />
+          {/*<section className={styles.local}>
             <header>
               <h1>login</h1>
             </header>
             <div className={styles.form}>
               <LoginForm login={this.handleLogin} facebookLogin={this.handleFacebookLogin} message={this.props.message} />
             </div>
-          </section>
-          <div>or log in with</div>
+          </section>*/}
+          <header>
+              <h1>login</h1>
+            </header>
           <section className={styles.social}>
             <FacebookButton auth={this.handleFacebookLogin} />
             <GoogleButton />

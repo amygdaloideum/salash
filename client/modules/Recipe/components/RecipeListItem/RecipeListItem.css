@@ -2,6 +2,7 @@
   padding: 15px 10px;
   cursor:pointer;
   font-size: 18px; 
+  display: flex;
 }
 
 .single-recipe:hover {
@@ -54,6 +55,19 @@
   overflow: hidden;
   display: inline-block;
   margin-right: 25px; 
+}
+
+.love-rating {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.love-rating i {
+  font-size: 2em;
+  padding: 10px;
+  color: $pink;
 }
 
 .image-wrapper img {

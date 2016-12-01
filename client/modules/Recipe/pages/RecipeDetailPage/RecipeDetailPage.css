@@ -31,3 +31,7 @@
   object-fit: contain;
   transform: translateY(-30%);
 }
+
+.int-buttons > * {
+  margin: 5px;
+}

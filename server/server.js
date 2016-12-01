@@ -45,6 +45,7 @@ import ingredients from './routes/ingredient.routes';
 import categories from './routes/category.routes';
 import auth from './routes/auth.routes';
 import users from './routes/user.routes';
+import interactions from './routes/interaction.routes'
 import dummyData from './dummyData';
 import serverConfig from './config/config'
 import { getInitialState, isAuthenticated } from './util/authUtils';
@@ -81,6 +82,9 @@ app.use('/api', ingredients);
 app.use('/api', categories);
 app.use('/api', users);
 app.use('/api', auth);
+app.use('/api', interactions);
+
+
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -112,7 +116,7 @@ const renderFullPage = (html, initialState) => {
   <script>
   window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
   ${process.env.NODE_ENV === 'production' ?
-  `//<![CDATA[
+      `//<![CDATA[
     window.webpackManifest = ${JSON.stringify(chunkManifest)};
     //]]>` : ''}
     </script>
@@ -121,57 +125,57 @@ const renderFullPage = (html, initialState) => {
     </body>
     </html>
     `;
-  };
+};
 
-  const renderError = err => {
-    const softTab = '&#32;&#32;&#32;&#32;';
-    const errTrace = process.env.NODE_ENV !== 'production' ?
+const renderError = err => {
+  const softTab = '&#32;&#32;&#32;&#32;';
+  const errTrace = process.env.NODE_ENV !== 'production' ?
     `:<br><br><pre style="color:red">${softTab}${err.stack.replace(/\n/g, `<br>${softTab}`)}</pre>` : '';
-    return renderFullPage(`Server Error${errTrace}`, {});
-  };
+  return renderFullPage(`Server Error${errTrace}`, {});
+};
 
-  // Server Side Rendering based on routes matched by React-router.
-  app.use((req, res, next) => {
-    match({ routes: routes(isAuthenticated(req, res)) , location: req.url }, (err, redirectLocation, renderProps) => {
-      if (err) {
-        return res.status(500).end(renderError(err));
-      }
+// Server Side Rendering based on routes matched by React-router.
+app.use((req, res, next) => {
+  match({ routes: routes(isAuthenticated(req, res)), location: req.url }, (err, redirectLocation, renderProps) => {
+    if (err) {
+      return res.status(500).end(renderError(err));
+    }
 
-      if (redirectLocation) {
-        return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-      }
+    if (redirectLocation) {
+      return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+    }
 
-      if (!renderProps) {
-        return next();
-      }
+    if (!renderProps) {
+      return next();
+    }
 
-      const store = configureStore(getInitialState(req, res));
+    const store = configureStore(getInitialState(req, res));
 
-      return fetchComponentData(store, renderProps.components, renderProps.params, renderProps.location.query)
+    return fetchComponentData(store, renderProps.components, renderProps.params, renderProps.location.query)
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
-          <IntlWrapper>
-          <RouterContext {...renderProps} />
-          </IntlWrapper>
+            <IntlWrapper>
+              <RouterContext {...renderProps} />
+            </IntlWrapper>
           </Provider>
         );
         const finalState = store.getState();
 
         res
-        .set('Content-Type', 'text/html')
-        .status(200)
-        .end(renderFullPage(initialView, finalState));
+          .set('Content-Type', 'text/html')
+          .status(200)
+          .end(renderFullPage(initialView, finalState));
       })
       .catch((error) => next(error));
-    });
   });
+});
 
-  // start app
-  app.listen(serverConfig.port, (error) => {
-    if (!error) {
-      console.log(`MERN is running on port: ${serverConfig.port}!`); // eslint-disable-line
-    }
-  });
+// start app
+app.listen(serverConfig.port, (error) => {
+  if (!error) {
+    console.log(`MERN is running on port: ${serverConfig.port}!`); // eslint-disable-line
+  }
+});
 
-  export default app;
+export default app;

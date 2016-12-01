@@ -2,6 +2,8 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 import User from '../models/user';
 import jwt from 'jsonwebtoken';
 import config from '../config/config'
+import { getSession } from '../util/dbUtils';
+import cuid from 'cuid';
 
 export const profiles = {
   'facebookAuth': {
@@ -11,9 +13,30 @@ export const profiles = {
   }
 };
 
-const signToken = (user, secret) => jwt.sign({ username: user.facebook.name, _id: user._id}, config.secret, { expiresIn: '24h' });
+const signToken = (user, secret) => jwt.sign(user, config.secret, { expiresIn: '24h' });
 
 export function getFacebookStrategy() {
+  return new FacebookStrategy(profiles.facebookAuth, (accessToken, refreshToken, profile, done) => {
+    process.nextTick(() => {
+
+      getSession({}).run(`
+        MERGE (u:User {facebookId: "${profile.id}"})
+        ON CREATE SET u.cuid = "${cuid()}"        
+        ON CREATE SET u.facebookName = "${profile.displayName}"
+        ON CREATE SET u.facebookToken = "${accessToken}"
+        ON CREATE SET u.username = "${profile.displayName}"
+        RETURN u
+      `).then( response => {
+        const user = response.records[0].get('u').properties;
+        const token = signToken(user, config.secret);          
+        return done(null, {user, token});
+      });
+
+    });
+  })
+}
+
+export function getFacebookStrategyOld() {
   return new FacebookStrategy(profiles.facebookAuth, (accessToken, refreshToken, profile, done) => {
     process.nextTick(() => {
       User.findOne({ 'facebook.id': profile.id }, (err, user) => {

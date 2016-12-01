@@ -10,7 +10,7 @@ function RecipeList(props) {
       <div className={styles.meta}>
         <div className={styles.affirmation}>
           you searched for smoothies with tomato and banana
-      </div>
+        </div>
         <div className={styles.optionbar}>
           <span>most loved</span>
           <a>all time</a>

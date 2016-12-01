@@ -17,7 +17,7 @@ const Menu = ({ user }) => (
       <i className="material-icons">info_outline</i>
       <div>about</div>
     </Link>
-    { user && user._id ? <Link to={`/user/${user._id}`}> <i className="material-icons">face</i> <div>{user.username.split(' ')[0]}</div> </Link> : null }
+    { user && user.facebookId ? <Link to={`/user/${user._id}`}> <i className="material-icons">face</i> <div>{user.facebookName.split(' ')[0]}</div> </Link> : null }
   </div>
 );
 

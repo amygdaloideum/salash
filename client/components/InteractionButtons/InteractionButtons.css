@@ -1,0 +1,51 @@
+.interaction-button {
+  display: inline-flex;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+
+.interaction-button i {
+  padding-right: 10px;
+}
+
+/* LOVE BUTTON*/
+
+.love-button-inactive {
+  border: 1px solid $pink;
+}
+
+.love-button-inactive i {
+  color: $pink;
+}
+
+.love-button-inactive:hover {
+  color: $pink;
+  border-color: $pink;
+}
+
+.love-button-active {
+  background: $pink;
+  border: 1px solid $pink;
+}
+
+/* FAVORITE BUTTON*/
+
+.favorite-button-inactive {
+  border: 1px solid $orange;
+}
+
+.favorite-button-inactive i {
+  color: $orange;
+}
+
+.favorite-button-active {
+  background: $orange;
+  border: 1px solid $orange
+}
+
+.favorite-button-inactive:hover {
+  color: $orange;
+  border-color: $orange;
+}

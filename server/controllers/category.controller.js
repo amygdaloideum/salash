@@ -1,6 +1,7 @@
 import Category from '../models/category';
-import cuid from 'cuid';
-import slug from 'limax';
+import { getSession } from '../util/dbUtils';
+
+const formatCategories = records => records.map(record => record.get('category').properties);
 
 /**
  * Get all Categories
@@ -9,6 +10,12 @@ import slug from 'limax';
  * @returns void
  */
 export function getCategories(req, res) {
+    getSession(req).run(`
+      MATCH (category:Category) RETURN category
+    `).then(response => res.json({ categories: formatCategories(response.records)}));
+}
+
+export function getCategoriesOld(req, res) {
   Category.find().exec((err, categories) => {
     if (err) {
       res.status(500).send(err);
