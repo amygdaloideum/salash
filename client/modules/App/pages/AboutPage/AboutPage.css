@@ -1,0 +1,30 @@
+.wrapper {
+  max-width: 800px;
+  margin-top: 50px;
+}
+
+.wrapper p {
+  padding: 35px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.pink {
+  color: $pink;
+}
+
+.orange  {
+  color: $orange;
+}
+
+.green  {
+  color: $green;
+}
+
+.turquoise  {
+  color: $turquoise;
+}
+
+.red  {
+  color: $red;
+}

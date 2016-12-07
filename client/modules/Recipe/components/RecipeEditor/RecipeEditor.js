@@ -1,10 +1,28 @@
 import React, { Component, PropTypes } from 'react';
-import RichTextEditor from 'react-rte';
+let RichTextEditor, RichTextEditorDefault;
+
+import styles from './RecipeEditor.css';
 
 export default class RecipeEditor extends Component {
 
-  state = {
-    value: RichTextEditor.createEmptyValue()
+  constructor () {
+    super()
+    this.state = {
+      shouldRender: false,
+      value: {}
+    }
+  }
+
+  /*state = {
+    value: RichTextEditor.createEmptyValue(),
+    shouldRender: false
+  }*/
+
+  componentDidMount () {
+    RichTextEditor = require('react-rte');
+    RichTextEditorDefault = RichTextEditor.default;
+    this.state.value = this.props.input.value ? RichTextEditor.createValueFromString(this.props.input.value, 'html') : RichTextEditor.createEmptyValue();    
+    this.setState({shouldRender: true})
   }
 
   onChange = (value) => {
@@ -39,12 +57,17 @@ export default class RecipeEditor extends Component {
         { label: 'OL', style: 'ordered-list-item' }
       ]
     };
-    return (
-      <RichTextEditor
-        value={this.state.value}
-        onChange={this.onChange}
-        toolbarConfig={toolbarConfig}
-        />
-    );
+    if (this.state.shouldRender) {
+      return (
+        <RichTextEditorDefault
+          className={styles.editor}
+          value={this.state.value}
+          onChange={this.onChange}
+          toolbarConfig={toolbarConfig}
+          />
+      );
+    } else {
+      return null;
+    }
   }
 }

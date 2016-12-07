@@ -12,3 +12,7 @@ export function getSession(context) {
     return context.neo4jSession;
   }
 }
+
+export const getByKey = (res, key) => res.records[0].get(key)
+
+export const getAllByKey = (res, key) => res.records.map(record => record.get(key));

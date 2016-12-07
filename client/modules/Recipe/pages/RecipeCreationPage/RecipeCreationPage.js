@@ -23,11 +23,18 @@ export class RecipeCreationPage extends Component {
     this.props.dispatch(addRecipeRequest(fields));
   };
 
+  initialValues = {
+    categories: [],
+    ingredients: [
+      { amount: '', name: '' }
+    ]
+  };
+
   render() {
     return (
       <div className={styles.create}>
         <h1>add recipe</h1>
-        <RecipeCreateForm handleCreate={this.handleCreate} categories={this.props.categories}/>
+        <RecipeCreateForm initialValues={this.initialValues} handleCreate={this.handleCreate} categories={this.props.categories}/>
       </div>
     );
   }

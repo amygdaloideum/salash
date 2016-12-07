@@ -16,11 +16,11 @@ const Toolbar = ({ user }) => (
       <i className="material-icons">add</i>
       <div>contribute</div>
     </Link>
-    <Link>
+    <Link to="/about">
       <i className="material-icons">info_outline</i>
       <div>about</div>
     </Link>
-    { user && user.facebookId ? <Link to={`/user/${user._id}`}> <i className="material-icons">face</i> <div>{user.facebookName.split(' ')[0].toLowerCase()}</div> </Link> : null }
+    { user && user.facebookId ? <Link to={`/user/${user.cuid}`}> <i className="material-icons">face</i> <div>{user.facebookName.split(' ')[0].toLowerCase()}</div> </Link> : null }
   </div>
 );
 

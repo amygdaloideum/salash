@@ -9,6 +9,7 @@ export const LOVE_RECIPE = 'LOVE_RECIPE';
 export const UNLOVE_RECIPE = 'UNLOVE_RECIPE';
 export const FAVORITE_RECIPE = 'FAVORITE_RECIPE';
 export const UNFAVORITE_RECIPE = 'UNFAVORITE_RECIPE';
+export const DELETE_RECIPE = 'DELETE_RECIPE';
 
 
 // Export Actions
@@ -20,8 +21,6 @@ export function addRecipes(recipes) {
 }
 
 export function addRecipe(recipe) {
-  console.log('FETCHED RECIPE:');
-  console.log(recipe);
   return {
     type: ADD_RECIPE,
     recipe,
@@ -56,6 +55,14 @@ export function unfavoriteRecipe(recipe) {
   };
 }
 
+export function deleteRecipe(cuid) {
+  return {
+    type: DELETE_RECIPE,
+    cuid
+  };
+}
+
+
 
 
 export function fetchRecipes() {
@@ -83,6 +90,14 @@ export function searchRecipes(query) {
 export function addRecipeRequest(recipe) {
   return (dispatch) => {
     return callApi('recipes', 'post', { recipe }).then(res => {
+      browserHistory.push('/created');
+    });
+  };
+}
+
+export function updateRecipeRequest(cuid, recipe) {
+  return (dispatch) => {
+    return callApi('recipes', 'put', { cuid, recipe }).then(res => {
       browserHistory.push('/created');
     });
   };
@@ -119,3 +134,13 @@ export function unfavoriteRecipeRequest(recipe) {
     });
   };
 }
+
+export function deleteRecipeRequest(recipe) {
+  return dispatch => {
+    return callApi('recipes', 'delete', { cuid: recipe.cuid }).then(res => {
+      dispatch(deleteRecipe(recipe.cuid));
+    });
+  };
+}
+
+

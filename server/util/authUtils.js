@@ -7,7 +7,9 @@ export function getInitialState(req, res) {
   let user;
   try {
     user = jwt.verify(token, config.secret);
-  } catch (err) { }
+  } catch (err) {
+    console.log(err);
+  }
 
   return user && token ? { auth: { token, user } } : {};
 }
@@ -19,5 +21,5 @@ export function isAuthenticated(req, res) {
     user = jwt.verify(token, config.secret);
   } catch (err) { }
 
-  return !!user;
+  return user;
 }

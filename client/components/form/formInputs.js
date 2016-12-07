@@ -4,23 +4,26 @@ import styles from './forminputs.css';
 
 export const renderInput = ({ input, label, icon, type, meta: { touched, error } }) => (
   <div className={styles['text-container']}>
-    <div className={styles['label-row']}>
-      <label>{label}</label> {touched && error && <span className={styles['validation-error']}>{error}</span>}
-    </div>
+    {label ?
+      <div className={styles['label-row']}>
+        <label>{label}</label> {touched && error && <span className={styles['validation-error']}>{error}</span>}
+      </div> : null
+    }
     <div className={styles['input-field']}>
-      {icon ? <i className={`fa ${icon}`}></i> : null}
+      {/*icon ? <i className={`fa ${icon}`}></i> : null*/}
       <input {...input} type={type} />
     </div>
   </div>
 );
 
-export const renderTextarea = ({ input, label, type, meta: { touched, error } }) => (
+export const renderTextarea = ({ input, label, placeholder, type, meta: { touched, error } }) => (
   <div className={styles['text-container']}>
-    <label>{label}</label>
-    <div>
-      <textarea {...input} type={type} placeholder={label} />
-      {touched && error && <span>{error}</span>}
-    </div>
+    {label ?
+      <div className={styles['label-row']}>
+        <label>{label}</label> {touched && error && <span className={styles['validation-error']}>{error}</span>}
+      </div> : null
+    }
+    <textarea {...input} type={type} placeholder={placeholder} />
   </div>
 );
 

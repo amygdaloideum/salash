@@ -6,9 +6,9 @@
 .row input {
   background: transparent;
   border: none;
-  border-bottom: 2px solid $turquoise;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
   outline: none;
-  padding: 3px;
+  padding: 2px;
 }
 
 .remove {

@@ -4,48 +4,69 @@
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s linear;
+  width: 125px;
+  font-size: 1.1em;
 }
 
 .interaction-button i {
-  padding-right: 10px;
+  padding-right: 5px;
+  transition: all 0.5s linear;
 }
 
-/* LOVE BUTTON*/
+/* LOVE BUTTON */
 
 .love-button-inactive {
   border: 1px solid $pink;
-}
-
-.love-button-inactive i {
   color: $pink;
-}
-
-.love-button-inactive:hover {
-  color: $pink;
-  border-color: $pink;
 }
 
 .love-button-active {
   background: $pink;
   border: 1px solid $pink;
+  color: white;
 }
 
-/* FAVORITE BUTTON*/
+.love-button-active:hover {
+  background: $pinkDark;
+}
+
+/* FAVORITE BUTTON */
 
 .favorite-button-inactive {
   border: 1px solid $orange;
-}
-
-.favorite-button-inactive i {
-  color: $orange;
+  color: $orange
 }
 
 .favorite-button-active {
   background: $orange;
-  border: 1px solid $orange
+  border: 1px solid $orange;
+  color: white;
 }
 
-.favorite-button-inactive:hover {
-  color: $orange;
-  border-color: $orange;
+.favorite-button-active:hover{
+  background: $orangeDark;
+}
+
+/* DELETE BUTTON */
+
+.delete-button {
+  background: $ebonyclay;
+  color: white;
+}
+
+.delete-button:hover {
+  background: $ebonyclayDark;
+}
+
+/* EDIT BUTTON */
+
+.edit-button {
+  /*border: 1px solid $turquoise;*/
+  background: $turquoise;
+  color: white;
+  transition: background 0.2s ease;
+}
+
+.edit-button:hover {
+  background: $turquoiseDark;
 }

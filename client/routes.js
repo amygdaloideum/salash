@@ -23,15 +23,18 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/App/pages/StartPage/StartPage');
   require('./modules/Recipe/pages/RecipeCreationPage/RecipeCreationPage');
   require('./modules/Recipe/pages/RecipeCreatedPage/RecipeCreatedPage');
+  require('./modules/Recipe/pages/RecipeDeletedPage/RecipeDeletedPage');
   require('./modules/Recipe/pages/RecipeDetailPage/RecipeDetailPage');
+  require('./modules/Recipe/pages/RecipeEditPage/RecipeEditPage');  
   require('./modules/User/pages/UserPage');
   require('./modules/Auth/pages/LoginPage/LoginPage');
   require('./modules/Auth/pages/SignupPage/SignupPage');
   require('./modules/Auth/pages/NotFoundPage/NotFoundPage');
+  require('./modules/App/pages/AboutPage/AboutPage');
 }
 
-const requireAuth = (nextState, replace, auth) => {
-  if (!auth) {
+const requireAuth = (nextState, replace, user) => {
+  if (!user.cuid) {
     replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
@@ -41,12 +44,20 @@ const requireAuth = (nextState, replace, auth) => {
 
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
-export default auth => (
+export default user => (
   <Route path="/" component={App}>
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/App/pages/StartPage/StartPage').default);
+        });
+      }}
+    />
+    <Route
+      path="/about"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/App/pages/AboutPage/AboutPage').default);
         });
       }}
     />
@@ -89,7 +100,7 @@ export default auth => (
           cb(null, require('./modules/Recipe/pages/RecipeCreationPage/RecipeCreationPage').default);
         });
       }}
-      onEnter={(nextState, replace) => requireAuth(nextState, replace, auth)}
+      onEnter={(nextState, replace) => requireAuth(nextState, replace, user)}
     />
     <Route
       path="/created"
@@ -98,7 +109,23 @@ export default auth => (
           cb(null, require('./modules/Recipe/pages/RecipeCreatedPage/RecipeCreatedPage').default);
         });
       }}
-      onEnter={(nextState, replace) => requireAuth(nextState, replace, auth)}
+    />
+    <Route
+      path="/recipes/deleted"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Recipe/pages/RecipeDeletedPage/RecipeDeletedPage').default);
+        });
+      }}
+    />
+    <Route
+      path="/recipes/edit/:cuid"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Recipe/pages/RecipeEditPage/RecipeEditPage').default);
+        });
+      }}
+      onEnter={(nextState, replace) => requireAuth(nextState, replace, user)}
     />
     <Route
       path="/login"

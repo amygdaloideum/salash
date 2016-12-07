@@ -1,9 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 // Import Components
 import styles from './RecipeDetailPage.css';
-import { LoveButton, FavButton } from '../../../../components/InteractionButtons/InteractionButtons'
+import { LoveButton, FavButton, DeleteButton, EditButton } from '../../../../components/InteractionButtons/InteractionButtons'
 
 // Import Actions
 import {
@@ -11,13 +12,16 @@ import {
   loveRecipeRequest,
   unloveRecipeRequest,
   favoriteRecipeRequest,
-  unfavoriteRecipeRequest
+  unfavoriteRecipeRequest,
+  deleteRecipeRequest
 } from '../../RecipeActions';
 
 // Import Selectors
 import { getRecipe } from '../../RecipeReducer';
 
 class RecipeDetailsPage extends Component {
+
+  createMarkup = markup => ({ __html: markup });
 
   love = () => {
     this.props.dispatch(loveRecipeRequest(this.props.recipe));
@@ -35,40 +39,67 @@ class RecipeDetailsPage extends Component {
     this.props.dispatch(unfavoriteRecipeRequest(this.props.recipe));
   }
 
+  delete = () => {
+    browserHistory.push('/recipes/deleted');
+    this.props.dispatch(deleteRecipeRequest(this.props.recipe));
+  }
+
+  edit = () => {
+    browserHistory.push(`/recipes/edit/${this.props.recipe.cuid}`);
+  }
+
   render() {
+    const isAuthor = (this.props.recipe) ? this.props.recipe.author.cuid === this.props.user.cuid : undefined;
     return (
-      <div className={styles['single-recipe']}>
+      <div>
         {
-          this.props.recipe.imageUrl ? <div className={styles['image-wrapper']}><img src={this.props.recipe.imageUrl} /></div> : null
+          !this.props.recipe ? <div className={styles['recipe-not-']}>
+            <h1> Recipe not found</h1>
+          </div> : null
         }
-        <h1>{this.props.recipe.title}</h1>
-        <div className={styles['categories']}>
-          {this.props.recipe.categories.map((cat, i) => (
-            <span key={i}>{cat.name}</span>
-          ))}
-        </div>
+        {
+        this.props.recipe ?
+        <div className={styles['single-recipe']}>
+          {
+            this.props.recipe.imageUrl ? <div className={styles['image-wrapper']}><img src={this.props.recipe.imageUrl} /></div> : null
+          }
+          <h1>{this.props.recipe.title}</h1>
+          <div className={styles['categories']}>
+            {this.props.recipe.categories.map((cat, i) => (
+              <span key={i}>{cat.name}</span>
+            ))}
+          </div>
 
-        <p>{this.props.recipe.description}</p>
+          <p>{this.props.recipe.description}</p>
 
-        <div>
-          <h3>Ingredients</h3>
-          <table>
-            <tbody>
-              {this.props.recipe.ingredients.map((ing, i) => (
-                <tr key={i}>
-                  <td>{ing.name}</td>
-                  <td>{ing.amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <h3>Instructions</h3>
-        <p>{this.props.recipe.instructions}</p>
-        <div className={styles['int-buttons']}>
-          <LoveButton loveAction={this.love} unloveAction={this.unlove} interactions={this.props.recipe.interactions} />
-          <FavButton favoriteAction={this.favorite} unfavoriteAction={this.unfavorite} interactions={this.props.recipe.interactions} />
-        </div>
+          <div>
+            <h3>Ingredients</h3>
+            <table>
+              <tbody>
+                {this.props.recipe.ingredients.map((ing, i) => (
+                  <tr key={i}>
+                    <td>{ing.name}</td>
+                    <td>{ing.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <h3>Instructions</h3>
+          <div dangerouslySetInnerHTML={this.createMarkup(this.props.recipe.instructions)} />
+          <div className={styles['int-buttons']}>
+            <LoveButton loveAction={this.love} unloveAction={this.unlove} interactions={this.props.recipe.interactions} />
+            <FavButton favoriteAction={this.favorite} unfavoriteAction={this.unfavorite} interactions={this.props.recipe.interactions} />
+          </div>
+          {isAuthor ? (
+            <div className={styles['int-buttons']}>
+              <DeleteButton deleteAction={this.delete} />
+              <EditButton editAction={this.edit} />
+            </div>
+          ) : null
+          }
+        </div> : null
+        }
       </div>
     );
   }
@@ -83,14 +114,8 @@ RecipeDetailsPage.need = [({ params, state }) => {
 function mapStateToProps(state, props) {
   return {
     recipe: getRecipe(state, props.params.cuid),
+    user: state.auth.user
   };
 }
-
-RecipeDetailsPage.propTypes = {
-  recipe: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default connect(mapStateToProps)(RecipeDetailsPage);

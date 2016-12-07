@@ -9,15 +9,19 @@ class CategorySelect extends Component {
 
   handleChange(e, option) {
     const input = this.props.input;
-    const index = input.value.indexOf(option);
+    const index = input.value.findIndex(v => v.name === option);
 
     if (e.target.checked && index < 0) {
-      input.onChange(input.value.concat([e.target.value]));
+      input.onChange(input.value.concat([{name: e.target.value}]));
     } else {
       const copy = [...input.value];
       copy.splice(index, 1);
       input.onChange(copy);
     }
+  }
+
+  isChecked(option){
+    return ~this.props.input.value.findIndex(v => v.name === option);
   }
 
   render() {
@@ -30,7 +34,7 @@ class CategorySelect extends Component {
             <input
               type="checkbox"
               value={option}
-              checked={this.props.input.value.indexOf(option) >= 0}
+              checked={this.isChecked(option)}
               onChange={e => this.handleChange(e, option)} />
             <span>{option}</span>
           </div>

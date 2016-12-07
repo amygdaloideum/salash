@@ -7,10 +7,12 @@ const router = new Router();
 
 router.route('/recipes/search/').get(getUserFromToken, RecipeController.searchRecipes);
 
-// Get one post by cuid
 router.route('/recipes/:cuid').get(getUserFromToken, RecipeController.getRecipe);
 
-// Search posts by title
 router.route('/recipes').post(isAuthenticated, RecipeController.addRecipe);
+
+router.route('/recipes').put(isAuthenticated, RecipeController.updateRecipe);
+
+router.route('/recipes').delete(isAuthenticated, RecipeController.deleteRecipe);
 
 export default router;

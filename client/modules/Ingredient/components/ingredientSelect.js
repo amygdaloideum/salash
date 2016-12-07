@@ -29,7 +29,7 @@ const renderIngredients = ({ fields }) => (
             label="amount" />
           of
           <Field
-            name={`${field}.ingredient`}
+            name={`${field}.name`}
             type="text"
             component={renderField}
             label="ingredient" />

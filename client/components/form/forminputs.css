@@ -10,42 +10,37 @@
   font-weight: 300;
   font-size: 1.2em;
   color: #22313F;
+  margin-bottom: 5px;
 }
 
 .input-field{
   display: flex;
-  padding-bottom: 20px;
 }
 
-.text-container input {
+.text-container input, textarea {
   padding: .7rem;
-  border: none;
   font-size: 1em;
   color: #22313F;
   outline: 0;
   width: 100%;
   transition: all 0.2s linear;
   background: transparent;
-  border: 1px solid #22313F;
-  border-left-width: 0;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.15);
 }
 
 .text-container i {
   text-align: center;
   padding: .7rem;
   background: transparent;
-  color:#22313F;
+  color:rgba(0,0,0,0.30);
   width: 40px;
-  border: 1px solid #22313F;
+  border: 1px solid rgba(0,0,0,0.15);
   border-right-width: 0;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
 }
 
-.text-container input:focus {
+.text-container input:focus, textarea:focus {
   box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
+  border-color: $turquoise;
 }
 
 .text-container input:hover {
@@ -58,14 +53,10 @@
 .text-container textarea{
   resize: none;
   min-height: 70px;
-  width: 500px;
-  background: white;
+  width: 100%;
   outline: none;
   padding: 10px;
-  border: none;
-  border-radius: 10px;
   font-family: inherit;
-  border: 1px solid #D2D7D3;
 }
 
 .submit-button {
@@ -80,7 +71,7 @@
   outline: none;
   cursor: pointer;
   transition: all 0.2s linear;  
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .submit-button:disabled {
