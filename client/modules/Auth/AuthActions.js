@@ -76,7 +76,7 @@ const listenForCredentials = (popup, dispatch, resolve, reject) => {
 export function facebookLoginRequest() {
   return dispatch => {
     var settings = "scrollbars=no,toolbar=no,location=no,titlebar=no,directories=no,status=no,menubar=no,width=580,height=400";
-    const popup = window.open('http://localhost:8000/api/auth/facebook', 'facebook', settings);
+    const popup = window.open(`${window.location.origin}/api/auth/facebook`, 'facebook', settings);
     return listenForCredentials(popup, dispatch);
   }
 }
