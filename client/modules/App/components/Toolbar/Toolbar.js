@@ -8,19 +8,20 @@ const Toolbar = ({ user }) => (
     <Link to="/" className={styles.logo}>
       <h1>salash</h1>
     </Link>
-    <Link to="/find">
+    <Link to="/" id={styles.home}>
+      <i className="material-icons">home</i>
+      <div>home</div>
+    </Link>
+    <Link to="/find" className={styles.find}>
       <i className="material-icons">search</i>
       <div>find</div>
     </Link>
-    <Link to="/create">
+    <Link to="/create" className={styles.create}>
       <i className="material-icons">add</i>
-      <div>contribute</div>
+      <div>add</div>
     </Link>
-    <Link to="/about">
-      <i className="material-icons">info_outline</i>
-      <div>about</div>
-    </Link>
-    { user && user.facebookId ? <Link to={`/user/${user.cuid}`}> <i className="material-icons">face</i> <div>{user.facebookName.split(' ')[0].toLowerCase()}</div> </Link> : null }
+    { !user || !user.cuid ? <Link to="/about" className={styles.about}><i className="material-icons">info_outline</i><div>about</div></Link> : null }
+    { user && user.cuid ? <Link to={`/user/${user.cuid}`} className={styles.user}> <i className="material-icons">face</i> <div>you</div> </Link> : null }
   </div>
 );
 

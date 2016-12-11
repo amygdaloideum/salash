@@ -5,8 +5,7 @@ export default ({ user, goToRecipe }) => (
   <div>
     {
       user.recipes && !user.recipes.length
-        ? <span>{user.username}has no recipes :(</span>
-        : <h1>{user.username}'s recipes</h1>
+        ? <span>{user.username}has no recipes :(</span> : null
     }
     {user.recipes && user.recipes.map((recipe, index) => (
       <div key={index}>

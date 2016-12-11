@@ -1,5 +1,5 @@
 // Import Actions
-import { ADD_USER } from './UserActions';
+import { ADD_USER, REMOVE_USER } from './UserActions';
 
 // Initial State
 const initialState = {};
@@ -9,6 +9,9 @@ const UserReducer = (state = initialState, action) => {
     case ADD_USER:
       return action.user;
 
+    case REMOVE_USER:
+      return initialState;
+      
     default:
       return state;
   }

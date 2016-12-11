@@ -1,7 +1,10 @@
-/*blue 15C2D2*/
-/*red F16767*/
-/*yellow 15C2D2*/
-
 .wrapper {
   
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    width: 100%;
+    margin: 20px;
+  }
 }

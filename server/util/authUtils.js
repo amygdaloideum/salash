@@ -5,6 +5,9 @@ import config from '../config/config';
 export function getInitialState(req, res) {
   let token = new cookies(req, res).get('token');
   let user;
+  if(!token) {
+    return {};
+  }
   try {
     user = jwt.verify(token, config.secret);
   } catch (err) {

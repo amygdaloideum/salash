@@ -18,7 +18,7 @@ class LoginPage extends Component {
   };
 
   handleFacebookLogin = () => {
-    this.props.dispatch(facebookLoginRequest());
+    this.props.dispatch(facebookLoginRequest()).then( () => location.reload());
   };
 
   render() {

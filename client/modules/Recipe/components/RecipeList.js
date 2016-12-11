@@ -9,14 +9,14 @@ function RecipeList(props) {
     <div className={styles.recipelist}>
       <div className={styles.meta}>
         <div className={styles.affirmation}>
-          you searched for smoothies with tomato and banana
+          {props.affirmation}
         </div>
-        <div className={styles.optionbar}>
+        {/*<div className={styles.optionbar}>
           <span>most loved</span>
           <a>all time</a>
           <a>this month</a>
           <a>this week</a>
-        </div>
+        </div>*/}
       </div>
       {props.recipes.map((recipe, index) => (<RecipeListItem recipe={recipe} key={index} />))}
     </div>

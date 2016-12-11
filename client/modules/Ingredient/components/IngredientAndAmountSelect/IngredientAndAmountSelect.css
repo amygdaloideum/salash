@@ -38,6 +38,14 @@
   user-select: none;
 }
 
+.amount {
+  width: 50px;
+}
+
+.name {
+  width: 120px;
+}
+
 .ingredients-list li {
   display: flex;
 }

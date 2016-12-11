@@ -20,6 +20,12 @@ export function loginUser(token, user) {
   };
 }
 
+export function logout() {
+  return {
+    type: UNAUTH_USER
+  };
+}
+
 export function authError(message) {
   return {
     type: AUTH_ERROR,
@@ -72,5 +78,12 @@ export function facebookLoginRequest() {
     var settings = "scrollbars=no,toolbar=no,location=no,titlebar=no,directories=no,status=no,menubar=no,width=580,height=400";
     const popup = window.open('http://localhost:8000/api/auth/facebook', 'facebook', settings);
     return listenForCredentials(popup, dispatch);
+  }
+}
+
+export function logOutUser() {
+  return dispatch => {
+    cookie.remove('token');
+    dispatch(logout());
   }
 }

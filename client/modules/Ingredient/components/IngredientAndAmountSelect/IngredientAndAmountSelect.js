@@ -3,10 +3,10 @@ import { Field } from 'redux-form';
 
 import styles from './IngredientAndAmountSelect.css';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ className, input, label, type, meta: { touched, error } }) => (
   <div className={styles.row}>
     <div>
-      <input {...input} type={type} placeholder={label} />
+      <input {...input} className={className} type={type} placeholder={label} />
       {touched && error && <span>{error}</span>}
     </div>
   </div>
@@ -26,14 +26,16 @@ const renderIngredients = ({ fields }) => (
             name={`${field}.amount`}
             type="text"
             component={renderField}
+            className={styles.amount}
             label="amount" />
           of
           <Field
             name={`${field}.name`}
             type="text"
             component={renderField}
+            className={styles.name}
             label="ingredient" />
-          <a className={styles.remove} type="button" onClick={() => fields.remove(index)}><i className="material-icons">clear</i>remove</a>
+          <a className={styles.remove} type="button" onClick={() => fields.remove(index)}><i className="material-icons">clear</i></a>
         </li>
       )}
     </ul>

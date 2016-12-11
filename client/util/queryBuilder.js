@@ -44,3 +44,16 @@ export function formatQueryArray(fields) {
 }
 
 
+export function queryToAffirmation(query) {
+  if(!query.title && !query.ingredients && !query.categories) {
+    return 'showing all recipes'
+  }
+  query.ingredients = query.ingredients.constructor === Array ? query.ingredients.join(',') : query.ingredients;
+  query.categories = query.categories.constructor === Array ? query.categories.join(',') : query.categories;
+
+  const cat = query.categories ? query.categories.split(',').map(c => ` ${c}s`).join(',') : 'recipes';
+  const ing = query.ingredients ? `containing ${query.ingredients}` : '';
+  const title = query.title ? `with title \'${query.title}\'` : '';
+  return `showing ${cat} ${ing} ${title}`;
+}
+

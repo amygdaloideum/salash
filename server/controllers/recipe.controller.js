@@ -63,7 +63,7 @@ export function searchRecipes(req, res) {
     WHERE ALL(
       category IN desiredCategories
       WHERE (recipe)-[:IS]->(category)
-    ) 
+    )
     AND ALL(
       ingredient IN desiredIngredients
       WHERE (recipe)-[:CONTAINS]->(ingredient)

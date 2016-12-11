@@ -6,7 +6,8 @@ import { browserHistory } from 'react-router';
 import UserRecipes from '../components/UserRecipes';
 
 // Import Actions
-import { fetchUser, addUser } from '../UserActions';
+import { fetchUser, addUser, removeUser } from '../UserActions';
+import { logOutUser } from '../../Auth/AuthActions';
 import { fetchRecipe } from '../../Recipe/RecipeActions';
 
 // Import Selectors
@@ -18,14 +19,29 @@ export class UserPage extends Component {
   }
 
   goToRecipe = (cuid, slug) => {
-     this.props.dispatch(fetchRecipe(cuid)).then( ()=>{
-       browserHistory.push(`/recipes/${slug}-${cuid}`);
-     });
+    this.props.dispatch(fetchRecipe(cuid)).then(() => {
+      browserHistory.push(`/recipes/${slug}-${cuid}`);
+    });
+  }
+
+  signOut = () => {
+    this.props.dispatch(logOutUser());
+    this.props.dispatch(removeUser());
+    browserHistory.push(`/`);
+    location.reload();
+  }
+
+  goToAbout = () => {
+    browserHistory.push(`/about`);
   }
 
   render() {
     return (
       <div>
+        <h1>{this.props.user.username}</h1>
+        <button onClick={this.signOut}>sign out</button>
+        <button onClick={this.goToAbout}>about salash</button>
+        <h2>recipes</h2>
         <UserRecipes goToRecipe={this.goToRecipe} user={this.props.user} />
       </div>
     );

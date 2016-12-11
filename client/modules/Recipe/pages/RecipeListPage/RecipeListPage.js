@@ -12,7 +12,7 @@ import { toggleAddRecipe } from '../../../App/AppActions';
 import { getShowAddRecipe } from '../../../App/AppReducer';
 import { getRecipes } from '../../RecipeReducer';
 
-import { jsToStringQuery } from '../../../../util/queryBuilder';
+import { jsToStringQuery, queryToAffirmation } from '../../../../util/queryBuilder';
 
 class RecipeListPage extends Component {
   componentDidMount() {
@@ -20,11 +20,15 @@ class RecipeListPage extends Component {
     this.props.dispatch(searchRecipes(url));
   }
 
+  getAffirmation = () => {
+    return queryToAffirmation(this.props.location.query);
+  }
+
   render() {
     return (
       <div>
       {
-        this.props.recipes ? (<RecipeList recipes={this.props.recipes} />) : null
+        this.props.recipes ? (<RecipeList affirmation={this.getAffirmation()} recipes={this.props.recipes} />) : null
       }
       </div>
     );
