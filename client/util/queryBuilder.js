@@ -1,19 +1,46 @@
-export function build({ category = [], ingredient = []}) {
-  if(category.constructor != Array){
-    category = [category];
-  }
-  if(ingredient.constructor != Array){
-    ingredient = [ingredient];
-  }
-  const baseUrl = 'recipes/search';
-  const categories = category.map( val => `category=${val}`);
-  const ingredients = ingredient.map( val => `ingredient=${val}`);
+export const encodeCategory = c => encodeURIComponent(c.replace(/\s/g, "-"));
+export const encodeIngredient = c => encodeURIComponent(c.replace(/\s/g, "-"));
 
-  const params = categories.concat(ingredients);
+export function build(baseUrl, fields) {
+
+  let { title, ingredients, categories } = fields;
+  categories = categories && categories.length ? categories.map(encodeCategory) : undefined;
+  ingredients = ingredients && ingredients.length ? ingredients.map(encodeIngredient) : undefined;
+
+  const titleQuery = title ? `title=${title}` : undefined;
+  const categoriesQuery = categories && categories.length ? `categories=${categories.join(',')}` : undefined;
+  const ingredientsQuery = ingredients && ingredients.length ? `ingredients=${ingredients.join(',')}`: undefined;
+  //const categories = category.map( val => `category=${val}`);
+  //const ingredients = ingredient.map( val => `ingredient=${val}`);
+
+
+
+  const params = [ titleQuery, categoriesQuery, ingredientsQuery ];
 
   let url = params.reduce(( prev, current, index ) => {
-    return index === 0 ? `${prev}?${current}` : `${prev}&${current}`;
+    if(!current) {
+      return prev;
+    }
+    return prev === baseUrl ? `${prev}?${current}` : `${prev}&${current}`;
   },  baseUrl);
 
   return url;
 }
+
+export function jsToStringQuery(baseUrl, fields) {
+
+  fields.ingredients = fields.ingredients ? fields.ingredients.split(',') : undefined;
+  fields.categories = fields.categories ? fields.categories.split(',') : undefined;
+
+  return build(baseUrl, fields)
+}
+
+export function formatQueryArray(fields) {
+
+  fields.ingredients = fields.ingredients ? fields.ingredients.split(',') : [];
+  fields.categories = fields.categories ? fields.categories.split(',') : [];
+
+  return fields;
+}
+
+

@@ -4,6 +4,8 @@
 
 .label-row {
   padding-bottom: 3px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .text-container label{
@@ -79,10 +81,10 @@
   cursor: default;
 }
 .submit-button:enabled {
-  box-shadow: 0 0 10px 0 rgba(0,0,0,.3);  
 }
 
 .submit-button:enabled:hover {
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.3);    
   background: #ee5f77 ;
 }
 

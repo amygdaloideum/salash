@@ -1,0 +1,70 @@
+.container {
+
+}
+
+.container input {
+  padding: .7rem;
+  font-size: 1em;
+  color: #22313F;
+  outline: 0;
+  width: 100%;
+  transition: all 0.2s linear;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.input {
+  display: flex;
+}
+
+button {
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6C7A89;
+  padding: 10px;
+  outline: 0;
+  color: white;
+  transition: all 0.2s linear;
+}
+
+.active-button {
+  background: $turquoise;
+}
+
+.container input:focus {
+  box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
+  border-color: $turquoise;
+}
+
+.chip {
+  display: inline-flex;
+  border: 1px solid $turquoise;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px 6px 15px;
+  border-radius: 16px;
+  margin: 3px;
+  color: $turquoise;
+  font-weight: 500;
+  cursor: default;
+}
+
+.chips{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip i {
+  font-size: 1.2em;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.container label {
+  font-weight: 300;
+  font-size: 1.2em;
+  color: #22313F;
+  margin-bottom: 5px;
+}

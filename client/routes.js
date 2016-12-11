@@ -62,18 +62,10 @@ export default user => (
       }}
     />
     <Route
-      path="/posts/:slug-:cuid"
+      path="/find"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostDetailPage/PostDetailPage').default);
-        });
-      }}
-    />
-    <Route
-      path="/posts"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
+          cb(null, require('./modules/Recipe/pages/RecipeSearchPage/RecipeSearchPage').default);
         });
       }}
     />

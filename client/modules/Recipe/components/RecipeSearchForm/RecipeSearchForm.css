@@ -1,0 +1,17 @@
+.search-form{
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form > div {
+  margin-top: 25px;
+}
+
+.search-form > div > h2 {
+  margin-bottom: 5px;
+}
+
+.submitbutton {
+  margin-top: 25px;
+}

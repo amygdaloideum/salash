@@ -38,7 +38,7 @@ body .Select-control{
 	border:none;
 }
 
-div, a, p, section, h1 {
+div, a, p, section, h1, h2, h3 {
 	text-decoration: none;
 	font-weight: 300;	
 }

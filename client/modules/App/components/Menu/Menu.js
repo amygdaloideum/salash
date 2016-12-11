@@ -5,9 +5,9 @@ import styles from './Menu.css';
 
 const Menu = ({ user }) => (
   <div className={styles.menu}>
-    <Link>
+    <Link to="/find">
       <i className="material-icons">search</i>
-      <div>advanced</div>
+      <div>find</div>
     </Link>
     <Link to="/create">
       <i className="material-icons">add</i>

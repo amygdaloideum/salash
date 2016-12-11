@@ -2,6 +2,7 @@ import cuid from 'cuid';
 import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
 import { getSession, getByKey } from '../util/dbUtils';
+import { formatQueryArray } from '../../client/util/queryBuilder';
 
 const formatRecipeResponse = record => {
   return {
@@ -45,18 +46,17 @@ export function getRecipe(req, res) {
 }
 
 export function searchRecipes(req, res) {
-  const categories = req.query.category.constructor === Array ? req.query.category : [req.query.category];
-  const ingredients = req.query.ingredient.constructor === Array ? req.query.ingredient : [req.query.ingredient];
+  const formattedQuery = formatQueryArray(req.query);
   const params = {
-    categories,
-    ingredients,
+    ...formattedQuery,
     beholderCuid: req.user ? req.user.cuid : null
   };
+  console.log(params);
   getSession(req).run(`
     MATCH (cat:Category) 
     WHERE cat.name IN {categories}
     WITH COLLECT(cat) as desiredCategories
-    MATCH (i:Ingredient)
+    OPTIONAL MATCH (i:Ingredient)
     WHERE i.name IN {ingredients}
     WITH desiredCategories, COLLECT(i) as desiredIngredients
     MATCH (recipe:Recipe)

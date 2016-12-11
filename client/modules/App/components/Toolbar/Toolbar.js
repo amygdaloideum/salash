@@ -8,9 +8,9 @@ const Toolbar = ({ user }) => (
     <Link to="/" className={styles.logo}>
       <h1>salash</h1>
     </Link>
-    <Link>
+    <Link to="/find">
       <i className="material-icons">search</i>
-      <div>advanced</div>
+      <div>find</div>
     </Link>
     <Link to="/create">
       <i className="material-icons">add</i>

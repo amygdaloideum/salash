@@ -3,7 +3,7 @@ import { Field, Fields, FieldArray, reduxForm } from 'redux-form';
 import RecipeEditor from '../RecipeEditor/RecipeEditor';
 import CategorySelect from '../../../Category/components/CategorySelect';
 import { renderTextarea, renderInput, SubmitButton } from '../../../../components/form/formInputs';
-import IngredientSelect from '../../../Ingredient/components/IngredientSelect';
+import IngredientAndAmountSelect from '../../../Ingredient/components/IngredientAndAmountSelect/IngredientAndAmountSelect';
 
 import styles from './RecipeCreateForm.css';
 
@@ -32,7 +32,7 @@ let RecipeCreateForm = ({ editMode,handleSubmit, handleCreate, categories, inval
       <Field name='categories' options={categories.map(c => c.name)} component={CategorySelect} />
     </div>
 
-    <FieldArray name="ingredients" component={IngredientSelect} />
+    <FieldArray name="ingredients" component={IngredientAndAmountSelect} />
 
     <div className={styles['text-container']}>
       <label>Instructions</label>

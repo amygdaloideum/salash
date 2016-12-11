@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 
-import styles from './IngredientSelect.css';
+import styles from './IngredientAndAmountSelect.css';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div className={styles.row}>

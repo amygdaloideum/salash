@@ -12,15 +12,20 @@ import { toggleAddRecipe } from '../../../App/AppActions';
 import { getShowAddRecipe } from '../../../App/AppReducer';
 import { getRecipes } from '../../RecipeReducer';
 
+import { jsToStringQuery } from '../../../../util/queryBuilder';
+
 class RecipeListPage extends Component {
   componentDidMount() {
-    this.props.dispatch(searchRecipes(this.props.location.query));
+    const url = jsToStringQuery('recipes/search', this.props.location.query);
+    this.props.dispatch(searchRecipes(url));
   }
 
   render() {
     return (
       <div>
-        <RecipeList recipes={this.props.recipes} />
+      {
+        this.props.recipes ? (<RecipeList recipes={this.props.recipes} />) : null
+      }
       </div>
     );
   }
@@ -40,11 +45,6 @@ function mapStateToProps(state) {
 }
 
 RecipeListPage.propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  })).isRequired,
-  showAddRecipe: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

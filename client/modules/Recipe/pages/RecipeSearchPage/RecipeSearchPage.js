@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import slug from 'limax';
 import { Link } from 'react-router';
+import { build } from '../../../../util/queryBuilder';
 
 // Import Components
-import RecipeSearchBox from '../../components/RecipeSearchBox/RecipeSearchBox';
-import RecipeQuickSearch from '../../components/RecipeQuickSearch/RecipeQuickSearch';
+import RecipeSearchForm from '../../components/RecipeSearchForm/RecipeSearchForm';
 
 import styles from './RecipeSearchPage.css';
 
@@ -21,37 +21,26 @@ class RecipeSearchPage extends Component {
     this.props.dispatch(fetchCategories());
   }
 
+  handleSearch = (fields) => {
+    browserHistory.push(build('search', fields));
+  };
+
   handleQuickSearch = (fields) => {
     const ingredient1 = slug(encodeURIComponent(fields.ingredient1.replace(/\s/g, "-")));
     const ingredient2 = slug(encodeURIComponent(fields.ingredient2.replace(/\s/g, "-")));
     browserHistory.push(`/search?category=${fields.category}&ingredient=${ingredient1}&ingredient=${ingredient2}`);
   };
 
+  initialValues = {
+    categories: [],
+    ingredients: []
+  };
+
   render() {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.bottom}>
-          <div className={styles.menu}>
-            <Link>
-              <div></div>
-              <div>advanced</div>
-              <div><i className="fa fa-chevron-right"></i></div>
-            </Link>
-            <Link to="/create">
-              <div></div>
-              <div>contribute</div>
-              <div><i className="fa fa-chevron-right"></i></div>
-            </Link>
-            <Link>
-              <div></div>
-              <div>about</div>
-              <div><i className="fa fa-chevron-right"></i></div>
-            </Link>
-          </div>
-          <div className={styles.search}>
-            <RecipeQuickSearch handleQuickSearch={this.handleQuickSearch} categories={this.props.categories} />
-          </div>
-        </div>
+        <h1>find recipes</h1>
+        <RecipeSearchForm initialValues={this.initialValues} categories={this.props.categories} handleSearch={this.handleSearch}/>
       </div>
     );
   }

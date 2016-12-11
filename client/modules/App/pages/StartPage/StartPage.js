@@ -24,7 +24,7 @@ class StartPage extends Component {
   handleQuickSearch = (fields) => {
     const ingredient1 = slug(encodeURIComponent(fields.ingredient1.replace(/\s/g, "-")));
     const ingredient2 = slug(encodeURIComponent(fields.ingredient2.replace(/\s/g, "-")));
-    browserHistory.push(`/search?category=${fields.category}&ingredient=${ingredient1}&ingredient=${ingredient2}`);
+    browserHistory.push(`/search?categories=${fields.category}&ingredients=${ingredient1},${ingredient2}`);
   };
 
   render() {

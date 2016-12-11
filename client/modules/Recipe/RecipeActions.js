@@ -1,5 +1,4 @@
 import callApi from '../../util/apiCaller';
-import { build } from '../../util/queryBuilder';
 import { browserHistory } from 'react-router';
 
 // Export Constants
@@ -79,9 +78,9 @@ export function fetchRecipe(cuid, token) {
   };
 }
 
-export function searchRecipes(query) {
+export function searchRecipes(url) {
   return (dispatch) => {
-    return callApi(build(query)).then(res => {
+    return callApi(url).then(res => {
       dispatch(addRecipes(res.recipes));
     });
   };
