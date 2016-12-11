@@ -6,6 +6,8 @@ var cssnext = require('postcss-cssnext');
 var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
 var cssnano = require('cssnano');
+var vars = require('postcss-simple-vars')
+var colors = require('./client/config/colors');
 
 module.exports = {
   devtool: 'hidden-source-map',
@@ -83,6 +85,7 @@ module.exports = {
   ],
 
   postcss: () => [
+    vars({ variables: colors }),
     postcssFocus(),
     cssnext({
       browsers: ['last 2 versions', 'IE > 10'],
